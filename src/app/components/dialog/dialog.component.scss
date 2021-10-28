@@ -1,0 +1,15 @@
+@import '../../../variables';
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+
+  ::ng-deep {
+    gmp-dialog-content {
+      width: 80%;
+    }
+  }
+}
+

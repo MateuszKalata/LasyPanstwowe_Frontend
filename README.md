@@ -1,3 +1,9 @@
+# LasyPanstwowe_Frontend
+
+[Dokumentacja](docs)
+
+[Repozytorium Backend](https://github.com/MateuszKalata/LasyPanstwowe_Backend)
+
 # GumpApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.11.

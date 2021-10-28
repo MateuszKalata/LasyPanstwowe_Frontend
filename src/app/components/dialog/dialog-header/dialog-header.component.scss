@@ -1,0 +1,12 @@
+@import '../../../../variables';
+
+.dialog-header {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 24px;
+  padding-top: 8px;
+  font-size: 24px;
+  color: $secondary;
+  font-weight: 500;
+  border-bottom: 2px $secondary-light solid;
+}

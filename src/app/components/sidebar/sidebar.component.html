@@ -1,0 +1,9 @@
+<div class="links">
+	<div class="link" *ngFor="let link of tabsConfig; let last = last; let first = first"
+		 (click)="redirect(link)"
+		 [class.link-last]="last" [class.active]="link.active"
+		 matRipple
+		 [matRippleCentered]="true">
+		{{link.label}}
+	</div>
+</div>

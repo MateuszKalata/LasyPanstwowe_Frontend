@@ -1,0 +1,45 @@
+@import '../../../variables';
+
+.links {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 68px;
+
+	.link {
+		color: $dark-gray;
+		width: 60%;
+		height: 48px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 100;
+		cursor: pointer;
+		border-bottom: 1px dashed $dark-gray;
+		clip-path: polygon(-30px 0, calc(100% + 30px) 0%, calc(100% + 30px) 100%, -30px 100%);
+		transition: $transition;
+
+		&.active {
+			background-color: $secondary-light-active;
+			box-shadow: 0 0 15px 20px $secondary-light-active;
+			color: $white;
+			font-weight: 400;
+		}
+
+		&.link-last {
+			border-bottom: none;
+		}
+
+		&:hover {
+			background-color: $secondary-light-hover;
+			box-shadow: 0 0 15px 20px $secondary-light-hover;
+
+			&.active {
+				background-color: $secondary-light-active-hover;
+				box-shadow: 0 0 15px 20px $secondary-light-active-hover;
+			}
+		}
+	}
+}

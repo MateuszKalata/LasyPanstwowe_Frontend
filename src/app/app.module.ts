@@ -1,18 +1,61 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatRippleModule} from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {ReactiveFormsModule} from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {TabComponent} from './components/tab/tab.component';
+import {TabHeaderComponent} from './components/tab/tab-header/tab-header.component';
+import {TabContentComponent} from './components/tab/tab-content/tab-content.component';
+import {ForestAreaCreationFormComponent} from './forestries/views/forest-area-creation-form/forest-area-creation-form.component';
+import {ForestryListComponent} from './forestries/views/forestry-list/forestry-list.component';
+import {MessageDialogComponent} from './components/message-dialog/message-dialog.component';
+import {DialogComponent} from './components/dialog/dialog.component';
+import {DialogHeaderComponent} from './components/dialog/dialog-header/dialog-header.component';
+import {DialogContentComponent} from './components/dialog/dialog-content/dialog-content.component';
+import { TestComponentComponent } from './components/test-component/test-component.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidebarComponent,
+    TabComponent,
+    TabHeaderComponent,
+    TabContentComponent,
+    ForestAreaCreationFormComponent,
+    ForestryListComponent,
+    MessageDialogComponent,
+    DialogComponent,
+    DialogHeaderComponent,
+    DialogContentComponent,
+    TestComponentComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatRippleModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MessageDialogComponent,
+    ForestAreaCreationFormComponent,
+  ],
 })
-export class AppModule { }
+export class AppModule {
+}

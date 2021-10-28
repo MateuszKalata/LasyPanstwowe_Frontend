@@ -1,0 +1,45 @@
+<gmp-dialog>
+  <gmp-dialog-header>
+    Dodaj obszar leśny
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <form [formGroup]="newForestAreaFormGroup" (ngSubmit)="onSubmit()">
+      <mat-form-field color="accent">
+        <input matInput
+               [formControlName]="'name'"
+               autocomplete="off"
+               placeholder="Nazwa">
+        <mat-error *ngIf="newForestAreaFormGroup.get('name')?.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input matInput
+               [formControlName]="'latitude'"
+               autocomplete="off"
+               type="number"
+               placeholder="Wysokość geograficzna">
+        <mat-error *ngIf="newForestAreaFormGroup.get('latitude')?.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input matInput
+               [formControlName]="'longitude'"
+               autocomplete="off"
+               type="number"
+               placeholder="Szerokość geograficzna">
+        <mat-error *ngIf="newForestAreaFormGroup.get('longitude')?.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-stroked-button type="button" (click)="onClose()" color="accent">Anuluj</button>
+        <button mat-raised-button type="submit" color="accent">Dodaj</button>
+      </div>
+    </form>
+  </gmp-dialog-content>
+</gmp-dialog>

@@ -1,0 +1,12 @@
+<div *ngIf="loading" class="progress-spinner">
+	<mat-dialog-content>
+		<mat-spinner></mat-spinner>
+	</mat-dialog-content>
+</div>
+<div *ngIf="!loading" class="dialog-wrapper">
+	<mat-dialog-content>
+		<p>{{message}}</p>
+		<button mat-raised-button class="button-close mat-elevation-z4" (click)="close()">OK</button>
+	</mat-dialog-content>
+</div>
+
