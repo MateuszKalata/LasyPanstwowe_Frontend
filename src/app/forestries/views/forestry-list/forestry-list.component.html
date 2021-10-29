@@ -1,18 +1,40 @@
-<button mat-raised-button color="accent"
-        (click)="forestryPresenter.onCreateForestAreaClicked()">
-  Dodaj obszar leśny
-</button>
+<gmp-tab>
+  <gmp-tab-header>
+    Leśnictwa
+  </gmp-tab-header>
 
+  <gmp-tab-content>
+    <div class="table-wrapper">
+      <div class="button-container">
+        <button (click)="forestryPresenter.onCreateForestAreaClicked()" color="accent"
+                mat-raised-button>
+          <mat-icon>add</mat-icon>
+          Dodaj obszar leśny
+        </button>
+        <button (click)="forestryPresenter.onCreateForestryClicked()" color="accent" mat-raised-button>
+          <mat-icon>add</mat-icon>
+          Dodaj leśnictwo
+        </button>
+      </div>
+      <table [dataSource]="forestryList" mat-table>
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell> Nazwa</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="surface">
+          <th *matHeaderCellDef mat-header-cell> Powierzchnia</th>
+          <td *matCellDef="let element" mat-cell> {{element.surface}} </td>
+        </ng-container>
+        <ng-container matColumnDef="typesOfForestation">
+          <th *matHeaderCellDef mat-header-cell> Typy zalesienia</th>
+          <td *matCellDef="let element" mat-cell> {{element.typesOfForestation.join(', ')}} </td>
+        </ng-container>
 
-<!--<gmp-tab>-->
-<!--  <gmp-tab-header>-->
-<!--    Tytuł taba-->
-<!--  </gmp-tab-header>-->
-<!---->
-<!--  <gmp-tab-content>-->
-<!--    <div style="color: red">-->
-<!--    TO JEST CONTENT-->
-<!--    </div>-->
-<!--  </gmp-tab-content>-->
-<!--</gmp-tab>-->
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr (click)="forestryPresenter.onForestryDetailsClicked(row.id)"
+            *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+  </gmp-tab-content>
+</gmp-tab>
 

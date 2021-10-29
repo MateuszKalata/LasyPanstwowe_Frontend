@@ -22,6 +22,10 @@ import {DialogComponent} from './components/dialog/dialog.component';
 import {DialogHeaderComponent} from './components/dialog/dialog-header/dialog-header.component';
 import {DialogContentComponent} from './components/dialog/dialog-content/dialog-content.component';
 import { TestComponentComponent } from './components/test-component/test-component.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
+import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,8 @@ import { TestComponentComponent } from './components/test-component/test-compone
     DialogHeaderComponent,
     DialogContentComponent,
     TestComponentComponent,
+    ForestryDetailsComponent,
+    ForestryCreationFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,8 @@ import { TestComponentComponent } from './components/test-component/test-compone
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],
