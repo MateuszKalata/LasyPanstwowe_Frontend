@@ -1,0 +1,17 @@
+.table-wrapper {
+    padding-top: 20px;
+    table {
+      width: 100%;
+    }
+  }
+  
+  .button-container {
+    padding-bottom: 10px;
+    button + button {
+      margin-left: 8px;
+    }
+  }
+  
+  .mat-row .mat-cell {
+    cursor: pointer;
+  }

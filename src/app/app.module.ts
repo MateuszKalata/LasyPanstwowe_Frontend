@@ -26,6 +26,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
+import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ForestryCreationFormComponent } from './forestries/views/forestry-creat
     TestComponentComponent,
     ForestryDetailsComponent,
     ForestryCreationFormComponent,
+    SensorListComponent
   ],
   imports: [
     BrowserModule,
