@@ -1,9 +1,10 @@
 import {XForestArea} from "./forest-area.model";
+import {ForestationTypeEnum} from "../enums/forestation-type.enum";
 
 export interface XForestry {
-  id: number;
+  id?: number;
   name: string;
   surface: number;
-  typesOfForestation: string[];
+  typesOfForestation: ForestationTypeEnum;
   forestryAreas?: XForestArea[];
 }
