@@ -15,6 +15,7 @@ import {ForestryDetailsComponent} from "../forestry-details/forestry-details.com
 import {ICreateForestry} from "../../presenters/interfaces/create-forestry.interface";
 import {IShowForestryDetails} from "../../presenters/interfaces/show-forestry-details.interface";
 import {IShowForestryList} from "../../presenters/interfaces/show-forestry-list.interface";
+import {ForestationTypeEnum} from "../../../enums/forestation-type.enum";
 
 @Component({
   selector: 'gmp-forestry-list',
@@ -63,9 +64,12 @@ export class ForestryListComponent implements OnInit, IForestAreaViews, IForestr
 
   showForestryCreationForm(): void {
     const dialogRef: MatDialogRef<ForestryCreationFormComponent> = this.dialog.open(ForestryCreationFormComponent);
-    dialogRef.afterClosed().subscribe((res: XForestry | undefined) =>
-      // change this when ForestryCreationFormComponent implemented
-      this.forestryPresenter.onCreateForestrySave({id: 9, name: 'Lesnictwo 9', surface: 40, typesOfForestation: []}));
+    dialogRef.afterClosed().subscribe((res: XForestry | undefined) => {
+        if (res) {
+          this.forestryPresenter.onCreateForestrySave(res);
+        }
+      }
+    );
   }
 
   showForestryDetails(forestryDetails: XForestry): void {

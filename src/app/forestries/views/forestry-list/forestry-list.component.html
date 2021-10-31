@@ -27,7 +27,7 @@
         </ng-container>
         <ng-container matColumnDef="typesOfForestation">
           <th *matHeaderCellDef mat-header-cell> Typy zalesienia</th>
-          <td *matCellDef="let element" mat-cell> {{element.typesOfForestation.join(', ')}} </td>
+          <td *matCellDef="let element" mat-cell> {{element.typesOfForestation}} </td>
         </ng-container>
 
         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>

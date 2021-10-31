@@ -30,7 +30,7 @@ export class ForestryPresenter implements ICreateForestArea, ICreateForestry, IS
       this.onForestryListClicked();
     }, () => {
         this.forestryViews.showForestryCreationFailureMessage();
-    })
+    });
   }
 
   public onForestryDetailsClicked(id: number): void {
