@@ -1,0 +1,14 @@
+.dialog {
+  width: 400px;
+}
+
+mat-radio-group {
+  padding-bottom: 24px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+
+  mat-radio-button {
+    margin: 5px;
+  }
+}

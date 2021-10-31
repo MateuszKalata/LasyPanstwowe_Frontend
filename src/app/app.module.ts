@@ -26,6 +26,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ForestryCreationFormComponent } from './forestries/views/forestry-creat
     MatInputModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

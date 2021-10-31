@@ -1,1 +1,44 @@
-<p>forestry-creation-form works!</p>
+<gmp-dialog>
+  <gmp-dialog-header>
+    Dodaj nowe leśnictwo
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <form [formGroup]="newForestryFormGroup" (ngSubmit)="onSubmit()">
+      <mat-form-field color="accent">
+        <input matInput
+               [formControlName]="'name'"
+               autocomplete="off"
+               placeholder="Nazwa">
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input matInput
+               [formControlName]="'surface'"
+               autocomplete="off"
+               type="number"
+               placeholder="Powierzchnia [km2]">
+        <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>Typ zalesienia</mat-label>
+        <mat-select formControlName="typesOfForestation">
+          <mat-option [value]="'BROADLEAF'">Liściasty</mat-option>
+          <mat-option [value]="'CONIFEROUS'">Iglasty</mat-option>
+          <mat-option [value]="'MIXED'">Mieszany</mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-stroked-button type="button" (click)="onClose()" color="accent">Anuluj</button>
+        <button mat-raised-button type="submit" color="accent">Dodaj</button>
+      </div>
+    </form>
+  </gmp-dialog-content>
+</gmp-dialog>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
+
+import {XForestry} from '../../../models/forestry.model';
 
 @Component({
   selector: 'gmp-forestry-creation-form',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForestryCreationFormComponent implements OnInit {
 
-  constructor() { }
+  public newForestryFormGroup: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    surface: new FormControl('', Validators.required),
+    typesOfForestation: new FormControl('BROADLEAF', Validators.required)
+  });
+
+  constructor(private dialogRef: MatDialogRef<ForestryCreationFormComponent>) {
+  }
 
   ngOnInit(): void {
   }
 
+  public onSubmit(): void {
+    if (this.newForestryFormGroup.valid) {
+      const data: XForestry = {
+        name: this.newForestryFormGroup.controls.name.value,
+        surface: this.newForestryFormGroup.controls.surface.value,
+        typesOfForestation: this.newForestryFormGroup.controls.typesOfForestation.value,
+      };
+      this.dialogRef.close(data);
+    }
+  }
+
+  public onClose(): void {
+    this.dialogRef.close();
+  }
 }
