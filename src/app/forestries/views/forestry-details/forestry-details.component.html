@@ -1,1 +1,21 @@
-<p>forestry-details works!</p>
+<gmp-dialog>
+  <gmp-dialog-header>
+    Szczegóły leśnictwa
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <div class="details-list">
+      <h3>Nazwa</h3>
+    <p>{{data.name}}</p>
+    <h3>Obszar</h3>
+    <p>{{data.surface}}&nbsp;km<sup>2</sup></p>
+    <h3>Typy zalesienia</h3>
+      <p *ngIf="!data.typesOfForestation.length">Brak typów zalesienia</p>
+    <p *ngIf="data.typesOfForestation.length">{{'forestationType.' + data.typesOfForestation.toLowerCase() | translate}}</p>
+      <h3 >Obszary leśne</h3>
+      <p *ngIf="!data.forestryAreas?.length">Brak obszarów leśnych</p>
+      <ul *ngFor="let item of data.forestryAreas">
+        <li>{{item.name}}</li>
+      </ul>
+    </div>
+  </gmp-dialog-content>
+</gmp-dialog>

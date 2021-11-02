@@ -1,4 +1,4 @@
-import {XForestry} from "../../../models/forestry.model";
+import {XForestry} from '../../../models/forestry.model';
 
 export interface IForestryViews {
   showForestryCreationFailureMessage(): void;

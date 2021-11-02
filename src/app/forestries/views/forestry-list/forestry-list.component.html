@@ -23,11 +23,11 @@
         </ng-container>
         <ng-container matColumnDef="surface">
           <th *matHeaderCellDef mat-header-cell> Powierzchnia</th>
-          <td *matCellDef="let element" mat-cell> {{element.surface}} </td>
+          <td *matCellDef="let element" mat-cell> {{element.surface}}&nbsp;km<sup>2</sup></td>
         </ng-container>
         <ng-container matColumnDef="typesOfForestation">
           <th *matHeaderCellDef mat-header-cell> Typy zalesienia</th>
-          <td *matCellDef="let element" mat-cell> {{element.typesOfForestation}} </td>
+          <td *matCellDef="let element" mat-cell> {{'forestationType.' + element.typesOfForestation.toLowerCase() | translate}} </td>
         </ng-container>
 
         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>

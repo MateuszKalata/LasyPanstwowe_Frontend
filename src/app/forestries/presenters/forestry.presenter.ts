@@ -2,11 +2,11 @@ import {ICreateForestArea} from './interfaces/create-forest-area.interface';
 import {XForestArea} from '../../models/forest-area.model';
 import {IForestAreaViews} from '../views/interfaces/forest-area-views.interface';
 import {IForestryViews} from '../views/interfaces/forestry-views.interface';
-import {ForestryService} from "../services/forestry.service";
-import {ICreateForestry} from "./interfaces/create-forestry.interface";
-import {XForestry} from "../../models/forestry.model";
-import {IShowForestryDetails} from "./interfaces/show-forestry-details.interface";
-import {IShowForestryList} from "./interfaces/show-forestry-list.interface";
+import {ForestryService} from '../services/forestry.service';
+import {ICreateForestry} from './interfaces/create-forestry.interface';
+import {XForestry} from '../../models/forestry.model';
+import {IShowForestryDetails} from './interfaces/show-forestry-details.interface';
+import {IShowForestryList} from './interfaces/show-forestry-list.interface';
 
 export class ForestryPresenter implements ICreateForestArea, ICreateForestry, IShowForestryDetails, IShowForestryList {
   public forestryViews: IForestAreaViews & IForestryViews;

@@ -8,14 +8,13 @@ import {ForestryPresenter} from '../../presenters/forestry.presenter';
 import {IForestryViews} from '../interfaces/forestry-views.interface';
 import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
 import {ForestAreaCreationFormComponent} from '../forest-area-creation-form/forest-area-creation-form.component';
-import {XForestry} from "../../../models/forestry.model";
-import {ForestryService} from "../../services/forestry.service";
-import {ForestryCreationFormComponent} from "../forestry-creation-form/forestry-creation-form.component";
-import {ForestryDetailsComponent} from "../forestry-details/forestry-details.component";
-import {ICreateForestry} from "../../presenters/interfaces/create-forestry.interface";
-import {IShowForestryDetails} from "../../presenters/interfaces/show-forestry-details.interface";
-import {IShowForestryList} from "../../presenters/interfaces/show-forestry-list.interface";
-import {ForestationTypeEnum} from "../../../enums/forestation-type.enum";
+import {XForestry} from '../../../models/forestry.model';
+import {ForestryService} from '../../services/forestry.service';
+import {ForestryCreationFormComponent} from '../forestry-creation-form/forestry-creation-form.component';
+import {ForestryDetailsComponent} from '../forestry-details/forestry-details.component';
+import {ICreateForestry} from '../../presenters/interfaces/create-forestry.interface';
+import {IShowForestryDetails} from '../../presenters/interfaces/show-forestry-details.interface';
+import {IShowForestryList} from '../../presenters/interfaces/show-forestry-list.interface';
 
 @Component({
   selector: 'gmp-forestry-list',
@@ -57,12 +56,12 @@ export class ForestryListComponent implements OnInit, IForestAreaViews, IForestr
     this.forestryList = forestryList;
   }
 
-  showForestryCreationFailureMessage(): void {
+  public showForestryCreationFailureMessage(): void {
     const dialogRef: MatDialogRef<MessageDialogComponent> = this.dialog.open(MessageDialogComponent);
     dialogRef.componentInstance.message = 'Wystąpił błąd podczas tworzenia leśnictwa.';
   }
 
-  showForestryCreationForm(): void {
+  public showForestryCreationForm(): void {
     const dialogRef: MatDialogRef<ForestryCreationFormComponent> = this.dialog.open(ForestryCreationFormComponent);
     dialogRef.afterClosed().subscribe((res: XForestry | undefined) => {
         if (res) {
@@ -72,8 +71,7 @@ export class ForestryListComponent implements OnInit, IForestAreaViews, IForestr
     );
   }
 
-  showForestryDetails(forestryDetails: XForestry): void {
-    //change this when ForestryDetailsComponent implemented
-    this.dialog.open(ForestryDetailsComponent);
+  public showForestryDetails(forestryDetails: XForestry): void {
+    this.dialog.open(ForestryDetailsComponent, {data: forestryDetails});
   }
 }

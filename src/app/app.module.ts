@@ -8,6 +8,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -22,11 +26,14 @@ import {DialogComponent} from './components/dialog/dialog.component';
 import {DialogHeaderComponent} from './components/dialog/dialog-header/dialog-header.component';
 import {DialogContentComponent} from './components/dialog/dialog-content/dialog-content.component';
 import { TestComponentComponent } from './components/test-component/test-component.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatIconModule} from "@angular/material/icon";
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
-import {MatSelectModule} from "@angular/material/select";
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): any {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -58,7 +65,15 @@ import {MatSelectModule} from "@angular/material/select";
     ReactiveFormsModule,
     MatTableModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
