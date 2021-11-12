@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, Injector} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatRippleModule} from '@angular/material/core';
@@ -12,6 +12,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {MatSortModule} from '@angular/material/sort';
+import {MatDividerModule} from '@angular/material/divider';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -34,6 +36,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
 }
+export let AppInjector: Injector;
 
 @NgModule({
   declarations: [
@@ -67,6 +70,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
     MatIconModule,
     MatSelectModule,
     HttpClientModule,
+    MatSortModule,
+    MatDividerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -83,4 +88,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
   ],
 })
 export class AppModule {
+  constructor(private injector: Injector) {
+    AppInjector = this.injector;
+  }
 }
