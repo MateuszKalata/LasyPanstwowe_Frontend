@@ -28,7 +28,6 @@ export class ForestryCreationFormComponent implements OnInit {
       const data: XForestry = {
         name: this.newForestryFormGroup.controls.name.value,
         surface: this.newForestryFormGroup.controls.surface.value,
-        typesOfForestation: this.newForestryFormGroup.controls.typesOfForestation.value,
       };
       this.dialogRef.close(data);
     }

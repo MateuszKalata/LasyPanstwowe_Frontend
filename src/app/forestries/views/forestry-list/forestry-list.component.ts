@@ -22,7 +22,7 @@ import {IShowForestryList} from '../../presenters/interfaces/show-forestry-list.
   styleUrls: ['./forestry-list.component.scss'],
 })
 export class ForestryListComponent implements OnInit, IForestAreaViews, IForestryViews {
-  public displayedColumns: string[] = ['name', 'surface', 'typesOfForestation'];
+  public displayedColumns: string[] = ['name', 'surface'];
   public forestryPresenter: ICreateForestArea & ICreateForestry & IShowForestryDetails & IShowForestryList;
   public forestryList: XForestry[] = [];
 

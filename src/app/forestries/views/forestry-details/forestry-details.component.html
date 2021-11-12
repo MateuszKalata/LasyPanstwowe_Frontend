@@ -8,9 +8,6 @@
     <p>{{data.name}}</p>
     <h3>Obszar</h3>
     <p>{{data.surface}}&nbsp;km<sup>2</sup></p>
-    <h3>Typy zalesienia</h3>
-      <p *ngIf="!data.typesOfForestation.length">Brak typów zalesienia</p>
-    <p *ngIf="data.typesOfForestation.length">{{'forestationType.' + data.typesOfForestation.toLowerCase() | translate}}</p>
       <h3 >Obszary leśne</h3>
       <p *ngIf="!data.forestryAreas?.length">Brak obszarów leśnych</p>
       <ul *ngFor="let item of data.forestryAreas">
