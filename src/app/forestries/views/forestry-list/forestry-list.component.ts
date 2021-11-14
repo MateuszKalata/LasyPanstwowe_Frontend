@@ -11,6 +11,7 @@ import {XForestry} from '../../../models/forestry.model';
 import {ForestryCreationFormComponent} from '../forestry-creation-form/forestry-creation-form.component';
 import {ICreateForestry} from '../../presenters/interfaces/create-forestry.interface';
 import {IShowForestryList} from '../../presenters/interfaces/show-forestry-list.interface';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'gmp-forestry-list',
@@ -23,7 +24,7 @@ export class ForestryListComponent implements OnInit, AfterViewInit, IForestryVi
   public forestryDataSource: MatTableDataSource<XForestry> = new MatTableDataSource<XForestry>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
 
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private dialog: MatDialog, private router: Router, private snackbar: MatSnackBar) {
     this.forestryPresenter = new ForestryPresenter(this);
   }
 
@@ -40,8 +41,11 @@ export class ForestryListComponent implements OnInit, AfterViewInit, IForestryVi
   }
 
   public showForestryCreationFailureMessage(): void {
-    const dialogRef: MatDialogRef<MessageDialogComponent> = this.dialog.open(MessageDialogComponent);
-    dialogRef.componentInstance.message = 'Wystąpił błąd podczas tworzenia leśnictwa.';
+    this.snackbar.open('Wystąpił błąd podczas tworzenia nowego leśnictwa.', 'OK', {duration: 3000});
+  }
+
+  public showForestryCreationSuccessMessage(): void {
+    this.snackbar.open('Pomyślnie dodano nowe leśnictwo.', 'OK', {duration: 3000});
   }
 
   public showForestryCreationForm(): void {

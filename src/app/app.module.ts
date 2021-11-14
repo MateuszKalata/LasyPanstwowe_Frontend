@@ -32,6 +32,7 @@ import { ForestryDetailsComponent } from './forestries/views/forestry-details/fo
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -72,6 +73,7 @@ export let AppInjector: Injector;
     HttpClientModule,
     MatSortModule,
     MatDividerModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -17,6 +17,7 @@ export class ForestryPresenter implements ICreateForestry, IShowForestryList {
   public onCreateForestrySave(forestry: XForestry): void {
     this.forestryService.createForestry(forestry).subscribe(() => {
       this.onForestryListClicked();
+      this.forestryViews.showForestryCreationSuccessMessage();
     }, () => {
       this.forestryViews.showForestryCreationFailureMessage();
     });
