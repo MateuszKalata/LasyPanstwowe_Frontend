@@ -9,8 +9,14 @@
                [formControlName]="'name'"
                autocomplete="off"
                placeholder="Nazwa">
-        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('required')">
-          To pole jest <strong>wymagane</strong>
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('whitespace')">
+          To pole nie może być puste.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('pattern')">
+          Dozwolone tylko litery, spacje i myślniki.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('maxlength')">
+          Dozwolone max. 30 znaków.
         </mat-error>
       </mat-form-field>
 
@@ -19,20 +25,17 @@
                [formControlName]="'surface'"
                autocomplete="off"
                type="number"
-               placeholder="Powierzchnia [km2]">
+               min="0"
+               placeholder="Powierzchnia [ha]">
         <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('required')">
-          To pole jest <strong>wymagane</strong>
+          To pole nie może być puste.
         </mat-error>
-      </mat-form-field>
-
-      <mat-form-field color="accent">
-        <mat-label>Typ zalesienia</mat-label>
-        <mat-select formControlName="typesOfForestation">
-          <mat-option [value]="'BROADLEAF'">Liściasty</mat-option>
-          <mat-option [value]="'CONIFEROUS'">Iglasty</mat-option>
-          <mat-option [value]="'MIXED'">Mieszany</mat-option>
-
-        </mat-select>
+        <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('min')">
+          Dozwolone tylko liczby dodatnie.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('max')">
+          Maksymalna powierzchnia leśnictwa to 10000 ha.
+        </mat-error>
       </mat-form-field>
 
       <div class="button-row">
