@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
@@ -24,7 +24,8 @@ export class ForestryListComponent implements OnInit, AfterViewInit, IForestryVi
   public forestryDataSource: MatTableDataSource<XForestry> = new MatTableDataSource<XForestry>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
 
-  constructor(private dialog: MatDialog, private router: Router, private snackbar: MatSnackBar) {
+  constructor(private dialog: MatDialog, private router: Router, private snackbar: MatSnackBar,
+              private changeDetector: ChangeDetectorRef) {
     this.forestryPresenter = new ForestryPresenter(this);
   }
 
@@ -38,6 +39,8 @@ export class ForestryListComponent implements OnInit, AfterViewInit, IForestryVi
 
   public showForestryList(forestryList: XForestry[]): void {
     this.forestryDataSource = new MatTableDataSource<XForestry>(forestryList);
+    this.changeDetector.detectChanges();
+    this.forestryDataSource.sort = this.sort ? this.sort : null;
   }
 
   public showForestryCreationFailureMessage(): void {

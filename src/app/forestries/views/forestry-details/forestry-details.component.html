@@ -33,7 +33,7 @@
         <ng-container matColumnDef="typeOfForestation">
           <th *matHeaderCellDef mat-header-cell> Typ zalesienia</th>
           <td *matCellDef="let element"
-              mat-cell>{{ 'forestationType.' + element.typeOfForestation.toLowerCase() | translate}}</td>
+              mat-cell> </td>
         </ng-container>
         <tr *matHeaderRowDef="forestAreasColumns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: forestAreasColumns;" mat-row></tr>

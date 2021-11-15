@@ -12,21 +12,24 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root',
 })
 export class ForestryService {
-  // token zahardkodowany na stale, bo backend niepotrzebnie dodal autoryzacje
   private readonly AUTH_TOKEN_HARDCODED: string = 'Basic YXBpOm5pZXNhbW93aWNpZXNrb21wbGlrb3dhbmVoYXNsbw==';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  // typy dto zgodne z backendem
   public getForestries(): Observable<XForestry[]> {
-    return this.httpClient.get<XForestry[]>(environment.apiUrl + '/forestries',
-      {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)});
-    // gdyby nie bylo autoryzacji
-    // return this.httpClient.get<XForestry[]>(environment.apiUrl + '/forestries');
+    return this.httpClient.get<any[]>(environment.apiUrl + '/forestries',
+      {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
+      map((res: any[]) => {
+        return res.map(forestry => ({
+          id: forestry.id,
+          name: forestry.name,
+          surface: +forestry.surface,
+        }));
+      })
+    );
   }
 
-  // typy dto niezgodne z backendem, wiec jest mapowanie
   public getForestry(id: number): Observable<XForestryDetails> {
     return this.httpClient.get<any>(environment.apiUrl + '/forestry/' + id,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
@@ -34,8 +37,8 @@ export class ForestryService {
         return {
           id: res.id,
           name: res.name,
-          surface: +res.surface, // ta konstrukcja to zamienianie typu string na number (backend zwraca typ string zamiast number)
-          forestAreas: res.forest_areas,
+          surface: +res.surface,
+          forestAreas: [],
         };
       })
     );
