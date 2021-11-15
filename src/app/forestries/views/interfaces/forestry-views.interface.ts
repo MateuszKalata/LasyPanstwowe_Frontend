@@ -1,3 +1,8 @@
+import {XForestry} from '../../../models/forestry.model';
+
 export interface IForestryViews {
-  showForestryList(): void;
+  showForestryCreationFailureMessage(): void;
+  showForestryCreationSuccessMessage(): void;
+  showForestryCreationForm(): void;
+  showForestryList(forestryList: XForestry[]): void;
 }

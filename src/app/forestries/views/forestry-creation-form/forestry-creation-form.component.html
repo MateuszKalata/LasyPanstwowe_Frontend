@@ -1,0 +1,47 @@
+<gmp-dialog>
+  <gmp-dialog-header>
+    Dodaj nowe leśnictwo
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="newForestryFormGroup">
+      <mat-form-field color="accent">
+        <input [formControlName]="'name'"
+               autocomplete="off"
+               matInput
+               placeholder="Nazwa">
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('whitespace')">
+          To pole nie może być puste.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('pattern')">
+          Dozwolone tylko litery, spacje i myślniki.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('maxlength')">
+          Dozwolone max. 30 znaków.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input [formControlName]="'surface'"
+               autocomplete="off"
+               matInput
+               min="0"
+               placeholder="Powierzchnia [ha]"
+               type="number">
+        <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('min')">
+          Dozwolone tylko liczby dodatnie.
+        </mat-error>
+        <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('max')">
+          Maksymalna powierzchnia leśnictwa to 10000 ha.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button (click)="onClose()" color="accent" mat-stroked-button type="button">Anuluj</button>
+        <button color="accent" mat-raised-button type="submit">Dodaj</button>
+      </div>
+    </form>
+  </gmp-dialog-content>
+</gmp-dialog>

@@ -14,17 +14,17 @@ export class SidebarComponent implements OnInit {
 
   public tabsConfig: TabConfigurationModel[] = [
     {
-      label: 'Welcome',
+      label: 'Strona główna',
       url: 'welcome',
       active: false,
     },
     {
-      label: 'Forestries',
+      label: 'Leśnictwa',
       url: 'forestries',
       active: false,
     },
     {
-      label: 'Sensors',
+      label: 'Czujniki',
       url: 'sensors',
       active: false,
     },

@@ -1,0 +1,7 @@
+{
+  "forestationType" : {
+    "broadleaf": "Liściasty",
+    "coniferous": "Iglasty",
+    "mixed": "Mieszany"
+  }
+}

@@ -1,20 +1,35 @@
-import {ICreateForestArea} from './interfaces/create-forest-area.interface';
-import {XForestArea} from '../../models/forest-area.model';
-import {IForestAreaViews} from '../views/interfaces/forest-area-views.interface';
 import {IForestryViews} from '../views/interfaces/forestry-views.interface';
+import {ForestryService} from '../services/forestry.service';
+import {ICreateForestry} from './interfaces/create-forestry.interface';
+import {XForestry} from '../../models/forestry.model';
+import {IShowForestryList} from './interfaces/show-forestry-list.interface';
+import {AppInjector} from '../../app.module';
 
-export class ForestryPresenter implements ICreateForestArea {
-  public forestryViews: IForestAreaViews;
+export class ForestryPresenter implements ICreateForestry, IShowForestryList {
+  public forestryViews: IForestryViews;
+  public forestryService: ForestryService;
 
-  constructor(forestryViews: IForestAreaViews & IForestryViews) {
+  constructor(forestryViews: IForestryViews) {
     this.forestryViews = forestryViews;
+    this.forestryService = AppInjector.get(ForestryService);
   }
 
-  public onCreateForestAreaClicked(): void {
-    this.forestryViews.showForestAreaCreationForm();
+  public onCreateForestrySave(forestry: XForestry): void {
+    this.forestryService.createForestry(forestry).subscribe(() => {
+      this.onForestryListClicked();
+      this.forestryViews.showForestryCreationSuccessMessage();
+    }, () => {
+      this.forestryViews.showForestryCreationFailureMessage();
+    });
   }
 
-  public onCreateForestAreaSave(forestArea: XForestArea): void {
-    this.forestryViews.showForestAreaDetails(forestArea);
+  public onCreateForestryClicked(): void {
+    this.forestryViews.showForestryCreationForm();
   }
+
+  public onForestryListClicked(): void {
+    this.forestryService.getForestries().subscribe((forestryList: XForestry[]) =>
+      this.forestryViews.showForestryList(forestryList));
+  }
+
 }

@@ -1,18 +1,41 @@
-<button mat-raised-button color="accent"
-        (click)="forestryPresenter.onCreateForestAreaClicked()">
-  Dodaj obszar leśny
-</button>
+<gmp-tab>
+  <gmp-tab-header>
+    Leśnictwa
+  </gmp-tab-header>
 
-
-<!--<gmp-tab>-->
-<!--  <gmp-tab-header>-->
-<!--    Tytuł taba-->
-<!--  </gmp-tab-header>-->
-<!---->
-<!--  <gmp-tab-content>-->
-<!--    <div style="color: red">-->
-<!--    TO JEST CONTENT-->
-<!--    </div>-->
-<!--  </gmp-tab-content>-->
-<!--</gmp-tab>-->
+  <gmp-tab-content>
+    <div class="table-wrapper">
+      <div class="table-actions">
+        <button (click)="onCreateForestryClicked()" color="accent" mat-raised-button>
+          <mat-icon>add</mat-icon>
+          Dodaj
+        </button>
+        <mat-divider [vertical]="true"></mat-divider>
+        <small class="table-info">Liczba leśnictw: {{forestryDataSource.data.length}}</small>
+      </div>
+      <table *ngIf="forestryDataSource.data.length" [dataSource]="forestryDataSource" mat-table matSort matSortActive="name"
+             matSortDirection="asc" matSortDisableClear>
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header> Nazwa</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="surface">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header> Powierzchnia</th>
+          <td *matCellDef="let element" mat-cell> {{element.surface}}&nbsp;ha</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="onForestryDetailsClicked(element.id)" color="accent" mat-button>
+              Szczegóły
+            </button>
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr
+          *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+  </gmp-tab-content>
+</gmp-tab>
 
