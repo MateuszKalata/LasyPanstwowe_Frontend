@@ -3,11 +3,11 @@
     Dodaj nowe leśnictwo
   </gmp-dialog-header>
   <gmp-dialog-content>
-    <form [formGroup]="newForestryFormGroup" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="newForestryFormGroup">
       <mat-form-field color="accent">
-        <input matInput
-               [formControlName]="'name'"
+        <input [formControlName]="'name'"
                autocomplete="off"
+               matInput
                placeholder="Nazwa">
         <mat-error *ngIf="newForestryFormGroup.get('name')?.hasError('whitespace')">
           To pole nie może być puste.
@@ -21,12 +21,12 @@
       </mat-form-field>
 
       <mat-form-field color="accent">
-        <input matInput
-               [formControlName]="'surface'"
+        <input [formControlName]="'surface'"
                autocomplete="off"
-               type="number"
+               matInput
                min="0"
-               placeholder="Powierzchnia [ha]">
+               placeholder="Powierzchnia [ha]"
+               type="number">
         <mat-error *ngIf="newForestryFormGroup.get('surface')?.hasError('required')">
           To pole nie może być puste.
         </mat-error>
@@ -39,8 +39,8 @@
       </mat-form-field>
 
       <div class="button-row">
-        <button mat-stroked-button type="button" (click)="onClose()" color="accent">Anuluj</button>
-        <button mat-raised-button type="submit" color="accent">Dodaj</button>
+        <button (click)="onClose()" color="accent" mat-stroked-button type="button">Anuluj</button>
+        <button color="accent" mat-raised-button type="submit">Dodaj</button>
       </div>
     </form>
   </gmp-dialog-content>
