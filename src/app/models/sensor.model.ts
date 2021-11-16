@@ -6,4 +6,7 @@ export interface XSensor {
   dateAdded: string;
   geolocation: GeolocationModel;
   value: string;
+  forest_area_id?: number;
+  administrator?: string;
+  status?: string;
 }

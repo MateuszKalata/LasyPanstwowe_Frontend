@@ -27,7 +27,8 @@
             <td *matCellDef="let element" mat-cell> {{element.value}} </td>
           </ng-container>
           <tr *matHeaderRowDef="columns" mat-header-row></tr>
-          <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+          <tr (click)="sensorPresenter.onSensorDetailsClicked(row.id)" 
+              *matRowDef="let row; columns: columns;" mat-row></tr>
         </table>
       </div>
     </gmp-tab-content>

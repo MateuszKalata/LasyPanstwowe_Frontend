@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { XSensor } from 'src/app/models/sensor.model';
+import { IShowSensorDetails } from '../../presenters/interfaces/show-sensor-details.interface';
 import { IShowSensorList } from '../../presenters/interfaces/show-sensor-list.interface';
 import { SensorPresenter } from '../../presenters/sensors.presenter';
 import { SensorService } from '../../services/sensor.service';
 import { ISensorViews } from '../interfaces/sensor-views.interface';
+import { SensorDetailsComponent } from '../sensor-details/sensor-details.component';
 
 @Component({
   selector: 'gmp-sensor-list',
@@ -18,11 +21,16 @@ export class SensorListComponent implements OnInit, ISensorViews {
     'dateAdded',
     'value',
   ];
-  public sensorPresenter: IShowSensorList;
+  public sensorPresenter: IShowSensorList & IShowSensorDetails;
   public sensorList: XSensor[] = [];
 
-  constructor(private sensorService: SensorService) {
+  constructor(private dialog: MatDialog, private sensorService: SensorService) {
     this.sensorPresenter = new SensorPresenter(this, sensorService);
+  }
+  public showSensorDetails(sensor: XSensor): void {
+    const dialogRef : MatDialogRef<SensorDetailsComponent> = this.dialog.open(SensorDetailsComponent);
+    dialogRef.componentInstance.data = sensor;
+    // console.log(sensor);
   }
 
   public ngOnInit(): void {
