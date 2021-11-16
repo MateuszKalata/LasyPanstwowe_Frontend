@@ -31,6 +31,10 @@ import {DialogContentComponent} from './components/dialog/dialog-content/dialog-
 import { TestComponentComponent } from './components/test-component/test-component.component';
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
+import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.component';
+import { MatListModule } from '@angular/material/list'
+import { MatGridListModule } from '@angular/material/grid-list';
+import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-details.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -55,6 +59,8 @@ export let AppInjector: Injector;
     TestComponentComponent,
     ForestryDetailsComponent,
     ForestryCreationFormComponent,
+    SensorListComponent,
+    SensorDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,8 @@ export let AppInjector: Injector;
     ReactiveFormsModule,
     MatTableModule,
     MatIconModule,
+    MatListModule,
+    MatGridListModule,
     MatSelectModule,
     HttpClientModule,
     MatSortModule,

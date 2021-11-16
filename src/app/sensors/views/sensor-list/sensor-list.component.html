@@ -1,0 +1,35 @@
+<gmp-tab>
+    <gmp-tab-header>
+      Czujniki
+    </gmp-tab-header>
+  
+    <gmp-tab-content>
+      <div class="table-wrapper">
+        <table [dataSource]="sensorList" mat-table>
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell> ID</th>
+            <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th *matHeaderCellDef mat-header-cell> Nazwa</th>
+            <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="dateAdded">
+            <th *matHeaderCellDef mat-header-cell> Data dodania</th>
+            <td *matCellDef="let element" mat-cell> {{element.dateAdded}} </td>
+          </ng-container>
+          <ng-container matColumnDef="coordinates">
+            <th *matHeaderCellDef mat-header-cell> Współrzędne geograficzne</th>
+            <td *matCellDef="let element" mat-cell> Szerokość: {{element.geolocation.latitude}} Długość: {{element.geolocation.longitude}}</td>
+          </ng-container>
+          <ng-container matColumnDef="value">
+            <th *matHeaderCellDef mat-header-cell> Wartość</th>
+            <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+          </ng-container>
+          <tr *matHeaderRowDef="columns" mat-header-row></tr>
+          <tr (click)="sensorPresenter.onSensorDetailsClicked(row.id)" 
+              *matRowDef="let row; columns: columns;" mat-row></tr>
+        </table>
+      </div>
+    </gmp-tab-content>
+  </gmp-tab>
