@@ -15,6 +15,7 @@ export class SensorPresenter implements IShowSensorList, IShowSensorDetails {
   }
   public onSensorDetailsClicked(id: number): void {
     this.sensorService.getSensorDetails(id).subscribe((sensorDetails: XSensor) => {
+      console.log(sensorDetails)
       this.sensorViews.showSensorDetails(sensorDetails);
     })
   }
