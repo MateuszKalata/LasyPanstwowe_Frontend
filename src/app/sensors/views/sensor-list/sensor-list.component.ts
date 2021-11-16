@@ -33,14 +33,18 @@ export class SensorListComponent implements OnInit, ISensorViews {
   public showSensorDetails(sensor: XSensor): void {
     const dialogRef : MatDialogRef<SensorDetailsComponent> = this.dialog.open(SensorDetailsComponent);
     dialogRef.componentInstance.data = sensor;
-    // console.log(sensor);
   }
 
   public ngOnInit(): void {
-    this.sensorPresenter.onSensorListClicked();
+    if (this.activatedRoute.snapshot.params.id == undefined) {
+      this.sensorPresenter.onSensorListClicked();
+    } else {
+      this.sensorPresenter.onSensorForForestryClicked(this.activatedRoute.snapshot.params.id);
+    }
+  }
 
-    // TODO przykładowe przechwytywanie paramsa z urla
-    console.log(this.activatedRoute.snapshot.params.id);
+  public showSensorListForForestry(sensorList: XSensor[]) {
+    this.sensorList = sensorList
   }
 
   public showSensorList(sensorList: XSensor[]): void {
