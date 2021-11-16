@@ -7,7 +7,7 @@
         <div mat-subheader>Ogólne</div>
         <mat-list-item>
           <div mat-line>id</div>
-          <div mat-line>{{data?.id || "Sensor not assigned!"}}</div>
+          <div mat-line>{{data?.id}}</div>
         </mat-list-item>
         <mat-list-item>
           <div mat-line>nazwa</div>
@@ -25,15 +25,15 @@
         <div mat-subheader>Administracja</div>
         <mat-list-item>
           <div mat-line>Osoba zarządzająca</div>
-          <div mat-line>{{data?.administrator || "Sensor not assigned!"}}</div>
+          <div mat-line>{{data?.administrator}}</div>
         </mat-list-item>
         <mat-list-item>
           <div mat-line>Id przpisanego obszaru</div>
-          <div mat-line>{{data?.forest_area_id || "Sensor not assigned!"}}</div>
+          <div mat-line>{{data?.forest_area_id}}</div>
         </mat-list-item>
         <mat-list-item>
           <div mat-line>Lokalizacja</div>
-          <div mat-line>Szerokość: {{data?.geolocation?.latitude || "n/a"}}, Wysokość: {{data?.geolocation?.longitude || "n/a"}}</div>
+          <div mat-line>Szerokość: {{data?.geolocation?.latitude}}, Wysokość: {{data?.geolocation?.longitude}}</div>
         </mat-list-item>
       </mat-list>
     </mat-grid-tile>
@@ -43,7 +43,7 @@
         <div mat-subheader>Metryki</div>
         <mat-list-item>
           <div mat-line>Typ czujnika</div>
-          <div mat-line>{{data?.type || "Sensor not assigned!"}}</div>
+          <div mat-line>{{data?.type}}</div>
         </mat-list-item>
         <mat-list-item>
           <div mat-line>Wartość</div>
