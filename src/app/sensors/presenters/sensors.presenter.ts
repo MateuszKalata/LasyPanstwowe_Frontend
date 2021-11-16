@@ -22,6 +22,12 @@ export class SensorPresenter implements IShowSensorList, IShowSensorDetails {
     throw new Error('Method not implemented.');
   }
 
+  public onSensorForForestryClicked(id: number): void {
+    this.sensorService.getSensorForForestry(id).subscribe((sensorList: XSensor[]) => {
+      this.sensorViews.showSensorListForForestry(sensorList);
+    })
+  }
+
   public onSensorListClicked(): void {
     this.sensorService
       .getSensors()
