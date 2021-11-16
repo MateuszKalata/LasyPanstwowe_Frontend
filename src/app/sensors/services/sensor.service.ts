@@ -40,7 +40,7 @@ export class SensorService {
     ]);
   }
 
-  getSensorDetails(id: number): any {
+  getSensorDetails(id: number): Observable<XSensor[]> {
     return this.httpClient.get<any>(environment.apiUrl + '/sensor?id=' + id,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
       map((res) : XSensor[] => {
