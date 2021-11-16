@@ -4,7 +4,7 @@
 
 export const environment: any = {
   production: false,
-  apiUrl: 'https://lesna-przygoda.herokuapp.com',
+  apiUrl: 'https://lesnaprzygoda.herokuapp.com',
 };
 
 /*
