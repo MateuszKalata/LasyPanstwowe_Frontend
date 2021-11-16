@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
       active: false,
     },
     {
-      label: 'Czujniki',
+      label: 'Nieprzypisane czujniki',
       url: 'sensors',
       active: false,
     },
