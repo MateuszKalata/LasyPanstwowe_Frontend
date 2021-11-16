@@ -3,7 +3,7 @@ import { XSensor } from '../../models/sensor.model';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -40,10 +40,10 @@ export class SensorService {
     ]);
   }
 
-  getSensorDetails(id: number): Observable<XSensor[]> {
+  getSensorDetails(id: number): Observable<XSensor> {
     return this.httpClient.get<any>(environment.apiUrl + '/sensor?id=' + id,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
-      map((res) : XSensor[] => {
+      map((res) => {
         console.log(res)
         return {
           ...res[0],
