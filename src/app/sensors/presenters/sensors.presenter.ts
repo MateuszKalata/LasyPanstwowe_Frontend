@@ -3,14 +3,15 @@ import { SensorService } from '../services/sensor.service';
 import { ISensorViews } from '../views/interfaces/sensor-views.interface';
 import { IShowSensorDetails } from './interfaces/show-sensor-details.interface';
 import { IShowSensorList } from './interfaces/show-sensor-list.interface';
+import { AppInjector } from 'src/app/app.module';
 
 export class SensorPresenter implements IShowSensorList, IShowSensorDetails {
   public sensorViews: ISensorViews;
   public sensorService: SensorService;
 
-  constructor(sensorViews: ISensorViews, sensorService: SensorService) {
+  constructor(sensorViews: ISensorViews) {
     this.sensorViews = sensorViews;
-    this.sensorService = sensorService;
+    this.sensorService = AppInjector.get(SensorService);
   }
   public onSensorDetailsClicked(id: number): void {
     this.sensorService.getSensorDetails(id).subscribe((sensorDetails: XSensor) => {

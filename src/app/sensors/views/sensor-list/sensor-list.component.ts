@@ -25,7 +25,7 @@ export class SensorListComponent implements OnInit, ISensorViews {
   public sensorList: XSensor[] = [];
 
   constructor(private dialog: MatDialog, private sensorService: SensorService) {
-    this.sensorPresenter = new SensorPresenter(this, sensorService);
+    this.sensorPresenter = new SensorPresenter(this);
   }
   public showSensorDetails(sensor: XSensor): void {
     const dialogRef : MatDialogRef<SensorDetailsComponent> = this.dialog.open(SensorDetailsComponent);
