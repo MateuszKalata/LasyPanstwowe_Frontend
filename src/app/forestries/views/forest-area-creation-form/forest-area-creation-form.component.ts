@@ -48,7 +48,7 @@ export class ForestAreaCreationFormComponent implements OnInit {
   public addForestationType(): void {
     this.forestationTypes.push({
       name: this.newForestationTypeName,
-      surface: this.newForestationTypeSurface + ' ha',
+      surface: this.newForestationTypeSurface.toString(),
     });
     this.newForestationTypeName = '';
     this.newForestationTypeSurface = '';

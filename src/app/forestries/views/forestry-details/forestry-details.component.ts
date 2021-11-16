@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {MatDialogRef, MatDialog} from '@angular/material/dialog';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -27,7 +27,10 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   public forestAreasDataSource: MatTableDataSource<XForestArea> = new MatTableDataSource<XForestArea>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
 
-  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+  constructor(private dialog: MatDialog,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private changeDetectorRef: ChangeDetectorRef) {
     this.forestryDetailsPresenter = new ForestryDetailsPresenter(this);
   }
 
@@ -45,6 +48,8 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   public showForestryDetails(forestryDetails: XForestry): void {
     this.forestryDetails = forestryDetails;
     this.forestAreasDataSource = new MatTableDataSource(this.forestryDetails?.forestAreas ? this.forestryDetails.forestAreas : []);
+    this.changeDetectorRef.detectChanges();
+    this.forestAreasDataSource.sort = this.sort ?? null;
   }
 
   public showForestAreaCreationFailureMessage(): void {
@@ -78,6 +83,10 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
 
   public onCreateForestryAreaClicked(): void {
     this.forestryDetailsPresenter.onCreateForestAreaClicked();
+  }
+
+  public showSensorsForForestry(): void {
+    this.router.navigate([`sensors/${this.forestryDetails?.id}`]);
   }
 
   private measureAreasSurface(): number {

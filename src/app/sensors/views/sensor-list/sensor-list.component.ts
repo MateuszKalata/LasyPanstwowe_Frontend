@@ -7,6 +7,7 @@ import { SensorPresenter } from '../../presenters/sensors.presenter';
 import { SensorService } from '../../services/sensor.service';
 import { ISensorViews } from '../interfaces/sensor-views.interface';
 import { SensorDetailsComponent } from '../sensor-details/sensor-details.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'gmp-sensor-list',
@@ -24,7 +25,9 @@ export class SensorListComponent implements OnInit, ISensorViews {
   public sensorPresenter: IShowSensorList & IShowSensorDetails;
   public sensorList: XSensor[] = [];
 
-  constructor(private dialog: MatDialog, private sensorService: SensorService) {
+  constructor(private dialog: MatDialog,
+              private sensorService: SensorService,
+              private activatedRoute: ActivatedRoute) {
     this.sensorPresenter = new SensorPresenter(this);
   }
   public showSensorDetails(sensor: XSensor): void {
@@ -35,6 +38,9 @@ export class SensorListComponent implements OnInit, ISensorViews {
 
   public ngOnInit(): void {
     this.sensorPresenter.onSensorListClicked();
+
+    // TODO przykładowe przechwytywanie paramsa z urla
+    console.log(this.activatedRoute.snapshot.params.id);
   }
 
   public showSensorList(sensorList: XSensor[]): void {

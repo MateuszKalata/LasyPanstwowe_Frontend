@@ -16,6 +16,13 @@
           <mat-icon>add</mat-icon>
           Dodaj obszar leśny
         </button>
+        <button (click)="showSensorsForForestry()"
+                color="accent"
+                mat-raised-button
+                class="show-sensors-button">
+          <mat-icon>add</mat-icon>
+          Wyświetl czujniki dla tego leśnictwa
+        </button>
         <mat-divider [vertical]="true"></mat-divider>
         <small class="table-info">Liczba obszarów leśnych: {{forestAreasDataSource.data.length}}</small>
       </div>
