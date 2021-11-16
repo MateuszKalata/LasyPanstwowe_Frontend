@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {XForestry} from '../../models/forestry.model';
 import {XForestryDetails} from '../../models/forestry-details.model';
 import {environment} from '../../../environments/environment';
+import {XForestArea} from '../../models/forest-area.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,10 @@ export class ForestryService {
           id: res.id,
           name: res.name,
           surface: +res.surface,
-          forestAreas: [],
+          forestAreas: res.forest_areas.map((el: any) => {
+            el.forestationTypes = el.forestation_types;
+            return el;
+          }),
         };
       })
     );
@@ -46,6 +50,17 @@ export class ForestryService {
 
   public createForestry(forestry: XForestry): Observable<any> {
     return this.httpClient.post(environment.apiUrl + '/forestries', forestry,
+      {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)});
+  }
+
+  public createForestArea(forestArea: XForestArea): Observable<any> {
+    const data: any = {
+      forestry_id: forestArea.forestryId,
+      name: forestArea.name,
+      surface: forestArea.surface,
+      forestation_types: forestArea.forestationTypes,
+    };
+    return this.httpClient.post(environment.apiUrl + '/forestareas', data,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)});
   }
 }

@@ -20,7 +20,10 @@ export class ForestryDetailsPresenter implements ICreateForestArea, IShowForestr
   }
 
   public onCreateForestAreaSave(forestArea: XForestArea): void {
-    this.forestryDetailsViews.showForestAreaDetails(forestArea);
+    this.forestryService.createForestArea(forestArea).subscribe(_ => {
+      this.forestryService.getForestry(forestArea.forestryId ?? 1).subscribe((forestry: XForestry) =>
+        this.forestryDetailsViews.showForestryDetails(forestry));
+    });
   }
 
   public onForestryDetailsClicked(id: number): void {

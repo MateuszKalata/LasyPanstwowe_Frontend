@@ -7,13 +7,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -32,7 +33,6 @@ import { ForestryDetailsComponent } from './forestries/views/forestry-details/fo
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -81,6 +81,7 @@ export let AppInjector: Injector;
         deps: [HttpClient],
       },
     }),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

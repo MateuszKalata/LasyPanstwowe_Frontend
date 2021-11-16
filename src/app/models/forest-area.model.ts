@@ -1,10 +1,12 @@
-import {GeolocationModel} from './geolocation.model';
-import {ForestationTypeEnum} from '../enums/forestation-type.enum';
-
 export interface XForestArea {
   id?: number;
+  forestryId?: number;
   name: string;
-  surface?: number;
-  geolocation?: GeolocationModel;
-  typeOfForestation?: ForestationTypeEnum;
+  surface: string;
+  forestationTypes?: XForestationType[];
+}
+
+export interface XForestationType {
+  name: string;
+  surface: string;
 }

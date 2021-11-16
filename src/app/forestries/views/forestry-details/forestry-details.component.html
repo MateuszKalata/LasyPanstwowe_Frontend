@@ -28,12 +28,7 @@
         </ng-container>
         <ng-container matColumnDef="surface">
           <th *matHeaderCellDef mat-header-cell mat-sort-header>Powierzchnia</th>
-          <td *matCellDef="let element" mat-cell> {{element.surface}}&nbsp;ha</td>
-        </ng-container>
-        <ng-container matColumnDef="typeOfForestation">
-          <th *matHeaderCellDef mat-header-cell> Typ zalesienia</th>
-          <td *matCellDef="let element"
-              mat-cell> </td>
+          <td *matCellDef="let element" mat-cell> {{element.surface}}</td>
         </ng-container>
         <tr *matHeaderRowDef="forestAreasColumns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: forestAreasColumns;" mat-row></tr>

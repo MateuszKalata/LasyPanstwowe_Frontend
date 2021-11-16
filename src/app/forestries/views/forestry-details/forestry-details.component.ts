@@ -23,7 +23,7 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   public forestryDetailsPresenter: ICreateForestArea & IShowForestryDetails;
   public forestryDetails: XForestryDetails | undefined;
 
-  public forestAreasColumns: string[] = ['name', 'surface', 'typeOfForestation'];
+  public forestAreasColumns: string[] = ['name', 'surface'];
   public forestAreasDataSource: MatTableDataSource<XForestArea> = new MatTableDataSource<XForestArea>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
 
@@ -58,11 +58,33 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
       this.dialog.open(ForestAreaCreationFormComponent);
 
     dialogRef.afterClosed().subscribe((res: XForestArea | undefined) => {
-      console.log(res);
+      if (res && this.forestryDetails?.surface) {
+        if (this.measureAreasSurface() + Number(res.surface.split(' ')[0]) >
+          Number(this.forestryDetails?.surface.toString().split(' ')[0])) {
+
+          const messageDialogRef: MatDialogRef<MessageDialogComponent> =
+            this.dialog.open(MessageDialogComponent);
+          messageDialogRef.componentInstance.message = 'Niepowodzenie – powierzchnia leśnictwa przekroczona';
+        } else {
+          res.forestryId = this.forestryDetails?.id;
+          this.forestryDetailsPresenter.onCreateForestAreaSave(res);
+          const messageDialogRef: MatDialogRef<MessageDialogComponent> =
+            this.dialog.open(MessageDialogComponent);
+          messageDialogRef.componentInstance.message = 'Pomyślnie dodano nowy obszar leśny';
+        }
+      }
     });
   }
 
   public onCreateForestryAreaClicked(): void {
     this.forestryDetailsPresenter.onCreateForestAreaClicked();
+  }
+
+  private measureAreasSurface(): number {
+    let surface: number = 0;
+    this.forestryDetails?.forestAreas?.forEach((area: XForestArea) => {
+      surface += Number(area.surface.split(' ')[0]);
+    });
+    return surface;
   }
 }

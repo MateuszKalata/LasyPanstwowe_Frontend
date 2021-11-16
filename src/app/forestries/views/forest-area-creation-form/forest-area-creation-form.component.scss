@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 .dialog {
   width: 400px;
 }
@@ -11,4 +13,26 @@ mat-radio-group {
   mat-radio-button {
     margin: 5px;
   }
+}
+
+.forestation-type-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.data-column {
+  width: 80%;
+}
+
+.button-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forestation-types {
+  padding: 8px 0;
+  color: $dark-gray;
 }
