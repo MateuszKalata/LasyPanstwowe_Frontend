@@ -9,4 +9,6 @@ export interface XSensor {
   forest_area_id?: number;
   administrator?: string;
   status?: string;
+  unit?: string;
+  type?: string;
 }

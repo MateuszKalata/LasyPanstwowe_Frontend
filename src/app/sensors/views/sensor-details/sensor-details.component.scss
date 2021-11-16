@@ -1,0 +1,10 @@
+.sensor-grid {
+    width: 50vw;
+    height: max-content;
+    overflow: auto;
+    
+    & > .sensor-tile {
+        vertical-align: top;
+        overflow: inherit;
+    }
+}

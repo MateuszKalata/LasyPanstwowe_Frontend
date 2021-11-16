@@ -1,1 +1,56 @@
-<p>sensor-details works</p>
+<div>
+  <p>Szczegóły czujnika: <b>{{data?.name}}</b></p>
+  <mat-grid-list cols="3" class="sensor-grid">
+    
+    <mat-grid-tile class="sensor-tile">
+      <mat-list>
+        <div mat-subheader>Ogólne</div>
+        <mat-list-item>
+          <div mat-line>id</div>
+          <div mat-line>{{data?.id}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div mat-line>nazwa</div>
+          <div mat-line>{{data?.name}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div mat-line>Data dodania</div>
+          <div mat-line>{{data?.dateAdded}}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="sensor-tile">
+      <mat-list>
+        <div mat-subheader>Administracja</div>
+        <mat-list-item>
+          <div mat-line>Osoba zarządzająca</div>
+          <div mat-line>{{data?.administrator}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div mat-line>Id przpisanego obszaru</div>
+          <div mat-line>{{data?.forest_area_id}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div mat-line>Lokalizacja</div>
+          <div mat-line>{{data?.geolocation?.latitude}}, {{data?.geolocation?.longitude}}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="sensor-tile">
+      <mat-list>
+        <div mat-subheader>Metryki</div>
+        <mat-list-item>
+          <div mat-line>Typ czujnika</div>
+          <div mat-line>{{data?.type}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <div mat-line>Wartość</div>
+          <div mat-line>{{data?.value}}{{data?.unit}}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

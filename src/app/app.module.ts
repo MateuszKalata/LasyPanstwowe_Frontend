@@ -27,6 +27,9 @@ import {MatIconModule} from "@angular/material/icon";
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
 import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.component';
+import { MatListModule } from '@angular/material/list'
+import { MatGridListModule } from '@angular/material/grid-list';
+import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-details.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.com
     TestComponentComponent,
     ForestryDetailsComponent,
     ForestryCreationFormComponent,
-    SensorListComponent
+    SensorListComponent,
+    SensorDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,9 @@ import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.com
     MatInputModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

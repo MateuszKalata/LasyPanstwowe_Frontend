@@ -40,9 +40,9 @@ export class SensorService {
       name: 'Czujnik szczegółowy',
       dateAdded: '11.09.2021',
       geolocation: { latitude: 11, longitude: 22 },
-      value: '55',
+      value: '45',
       unit: '%',
-      type: 'Czujnik',
+      type: 'Czujnik wilgoci',
       administrator: 'Jan Kowalski',
       forest_area_id: 1,
       status: "assigned"
