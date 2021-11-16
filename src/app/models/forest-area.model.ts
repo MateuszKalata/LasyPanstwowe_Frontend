@@ -1,7 +1,12 @@
-import {GeolocationModel} from './geolocation.model';
-
 export interface XForestArea {
   id?: number;
+  forestryId?: number;
   name: string;
-  geolocation?: GeolocationModel;
+  surface: string;
+  forestationTypes?: XForestationType[];
+}
+
+export interface XForestationType {
+  name: string;
+  surface: string;
 }

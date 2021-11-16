@@ -1,1 +1,38 @@
-<p>forestry-details works!</p>
+<gmp-tab>
+  <gmp-tab-header>
+    Szczegóły leśnictwa
+  </gmp-tab-header>
+  <gmp-tab-content>
+    <div class="content-wrapper">
+      <h3>Nazwa</h3>
+      <p>{{forestryDetails?.name}}</p>
+      <h3>Obszar</h3>
+      <p>{{forestryDetails?.surface}}&nbsp;ha</p>
+      <h3>Obszary leśne</h3>
+      <div class="table-actions">
+        <button (click)="onCreateForestryAreaClicked()"
+                color="accent"
+                mat-raised-button>
+          <mat-icon>add</mat-icon>
+          Dodaj obszar leśny
+        </button>
+        <mat-divider [vertical]="true"></mat-divider>
+        <small class="table-info">Liczba obszarów leśnych: {{forestAreasDataSource.data.length}}</small>
+      </div>
+      <table *ngIf="forestAreasDataSource.data.length" [dataSource]="forestAreasDataSource" mat-table matSort
+             matSortActive="name"
+             matSortDirection="asc" matSortDisableClear>
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header> Nazwa</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="surface">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Powierzchnia</th>
+          <td *matCellDef="let element" mat-cell> {{element.surface}}</td>
+        </ng-container>
+        <tr *matHeaderRowDef="forestAreasColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: forestAreasColumns;" mat-row></tr>
+      </table>
+    </div>
+  </gmp-tab-content>
+</gmp-tab>

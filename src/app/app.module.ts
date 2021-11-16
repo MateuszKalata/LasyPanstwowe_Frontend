@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, Injector} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatRippleModule} from '@angular/material/core';
@@ -7,7 +7,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {MatSortModule} from '@angular/material/sort';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -22,14 +29,19 @@ import {DialogComponent} from './components/dialog/dialog.component';
 import {DialogHeaderComponent} from './components/dialog/dialog-header/dialog-header.component';
 import {DialogContentComponent} from './components/dialog/dialog-content/dialog-content.component';
 import { TestComponentComponent } from './components/test-component/test-component.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatIconModule} from "@angular/material/icon";
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
 import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.component';
 import { MatListModule } from '@angular/material/list'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-details.component';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): any {
+  return new TranslateHttpLoader(http);
+}
+export let AppInjector: Injector;
 
 @NgModule({
   declarations: [
@@ -64,7 +76,20 @@ import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-de
     MatTableModule,
     MatIconModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule,
+    HttpClientModule,
+    MatSortModule,
+    MatDividerModule,
+    MatSnackBarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -74,4 +99,7 @@ import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-de
   ],
 })
 export class AppModule {
+  constructor(private injector: Injector) {
+    AppInjector = this.injector;
+  }
 }

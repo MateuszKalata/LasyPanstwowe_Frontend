@@ -3,7 +3,7 @@
     Dodaj obszar leśny
   </gmp-dialog-header>
   <gmp-dialog-content>
-    <form [formGroup]="newForestAreaFormGroup" (ngSubmit)="onSubmit()">
+    <form [formGroup]="newForestAreaFormGroup">
       <mat-form-field color="accent">
         <input matInput
                [formControlName]="'name'"
@@ -16,30 +16,41 @@
 
       <mat-form-field color="accent">
         <input matInput
-               [formControlName]="'latitude'"
+               [formControlName]="'surface'"
                autocomplete="off"
-               type="number"
-               placeholder="Wysokość geograficzna">
-        <mat-error *ngIf="newForestAreaFormGroup.get('latitude')?.hasError('required')">
+               placeholder="Powierzchnia"
+               type="number">
+        <mat-error *ngIf="newForestAreaFormGroup.get('surface')?.hasError('required')">
           To pole jest <strong>wymagane</strong>
         </mat-error>
+        <span matSuffix>ha</span>
       </mat-form-field>
-
-      <mat-form-field color="accent">
-        <input matInput
-               [formControlName]="'longitude'"
-               autocomplete="off"
-               type="number"
-               placeholder="Szerokość geograficzna">
-        <mat-error *ngIf="newForestAreaFormGroup.get('longitude')?.hasError('required')">
-          To pole jest <strong>wymagane</strong>
-        </mat-error>
-      </mat-form-field>
-
-      <div class="button-row">
-        <button mat-stroked-button type="button" (click)="onClose()" color="accent">Anuluj</button>
-        <button mat-raised-button type="submit" color="accent">Dodaj</button>
-      </div>
     </form>
+
+    Zalesienia:
+    <div class="forestation-types" *ngFor="let forestationType of forestationTypes">
+      - {{forestationType.name}} - {{forestationType.surface}}
+    </div>
+
+    <div class="forestation-type-form">
+      <div class="data-column">
+        <mat-form-field color="accent">
+          <input matInput [(ngModel)]="newForestationTypeName" placeholder="Nazwa zalesienia">
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input matInput type="number" [(ngModel)]="newForestationTypeSurface" placeholder="Powierzchnia zalesienia">
+          <span matSuffix>ha</span>
+        </mat-form-field>
+      </div>
+      <div class="button-column">
+        <button [disabled]="!newForestationTypeSurface || !newForestationTypeName" mat-mini-fab type="button"
+                color="accent" (click)="addForestationType()">+
+        </button>
+      </div>
+    </div>
+    <div class="button-row">
+      <button mat-stroked-button type="button" (click)="onClose()" color="accent">Anuluj</button>
+      <button mat-raised-button type="submit" color="accent" (click)="onSubmit()">Dodaj</button>
+    </div>
   </gmp-dialog-content>
 </gmp-dialog>
