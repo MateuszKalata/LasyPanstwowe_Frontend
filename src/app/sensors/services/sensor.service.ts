@@ -38,7 +38,7 @@ export class SensorService {
           id: sensors.id,
           name: sensors.name,
           geolocation: {latitude: sensors.latitude, longitude: sensors.longitude},
-          dateAdded: sensors.date_added,
+          dateAdded: trDate(sensors.date_added),
           value: sensors.type
         }));
       })
@@ -49,10 +49,9 @@ export class SensorService {
     return this.httpClient.get<any>(environment.apiUrl + '/sensor?id=' + id,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
       map((res) => {
-        console.log(res)
         return {
           ...res,
-          dateAdded: trDate(res.date_added),
+          dateAdded: trDate(res.date_added, "DD.mm.YYYY HH:MM"),
           geolocation: {latitude: res.latitude, longitude: res.longitude},
           value: "0",
         };
