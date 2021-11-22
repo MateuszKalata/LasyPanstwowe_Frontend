@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {first, map} from 'rxjs/operators';
+import { trDate } from 'src/app/helpers/trDate';
 
 @Injectable({
   providedIn: 'root',
@@ -46,11 +47,10 @@ export class SensorService {
       map((res) => {
         console.log(res)
         return {
-          ...res[0],
-          dateAdded: res[0].date_added,
-          geolocation: {latitude: res[0].latitude, longitude: res[0].longitude},
-          value: "NaN",
-
+          ...res,
+          dateAdded: trDate(res.date_added),
+          geolocation: {latitude: res.latitude, longitude: res.longitude},
+          value: "0",
         };
       })
     )

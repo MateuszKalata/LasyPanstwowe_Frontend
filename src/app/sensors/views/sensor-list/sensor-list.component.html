@@ -26,9 +26,16 @@
             <th *matHeaderCellDef mat-header-cell> Wartość</th>
             <td *matCellDef="let element" mat-cell> {{element.value}} </td>
           </ng-container>
+          <ng-container matColumnDef="actions">
+            <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
+            <td *matCellDef="let element" mat-cell>
+              <button (click)="sensorPresenter.onSensorDetailsClicked(element.id)" color="accent" mat-button>
+                Szczegóły
+              </button>
+            </td>
+          </ng-container>
           <tr *matHeaderRowDef="columns" mat-header-row></tr>
-          <tr (click)="sensorPresenter.onSensorDetailsClicked(row.id)" 
-              *matRowDef="let row; columns: columns;" mat-row></tr>
+          <tr *matRowDef="let row; columns: columns;" mat-row></tr>
         </table>
       </div>
     </gmp-tab-content>
