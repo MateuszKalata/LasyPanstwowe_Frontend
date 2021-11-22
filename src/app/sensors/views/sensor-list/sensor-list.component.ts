@@ -21,6 +21,7 @@ export class SensorListComponent implements OnInit, ISensorViews {
     'coordinates',
     'dateAdded',
     'value',
+    'actions',
   ];
   public sensorPresenter: IShowSensorList & IShowSensorDetails;
   public sensorList: XSensor[] = [];
