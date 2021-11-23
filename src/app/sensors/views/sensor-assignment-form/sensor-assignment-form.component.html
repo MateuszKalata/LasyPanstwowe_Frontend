@@ -1,0 +1,47 @@
+<gmp-dialog>
+  <gmp-dialog-header>
+    Przypisz sensor do obszaru leśnego
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <div class="sensor-assignment-form">
+      <mat-form-field color="accent">
+        <mat-label>
+          Leśnictwo
+        </mat-label>
+        <mat-select
+          [formControl]="forestryFormControl">
+          <mat-select-trigger>
+            {{forestryFormControl.value ? forestryFormControl.value.name : ''}}
+          </mat-select-trigger>
+          <mat-option *ngFor="let forestry of forestries" [value]="forestry">{{forestry.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="forestryFormControl.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <mat-label>
+          {{showNoForestAreasLabel ? 'Brak obszarów leśnych w leśnictwie' : 'Obszar leśny'}}
+        </mat-label>
+        <mat-select
+          [formControl]="forestAreaFormControl"
+          [disabled]="forestAreas.length <= 0">
+          <mat-select-trigger>
+            {{forestAreaFormControl.value ? forestAreaFormControl.value.name : ''}}
+          </mat-select-trigger>
+          <ng-container *ngIf="forestAreas.length > 0">
+            <mat-option *ngFor="let forestArea of forestAreas" [value]="forestArea">{{forestArea.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="forestAreaFormControl.hasError('required')">
+          To pole jest <strong>wymagane</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="button-row">
+      <button mat-stroked-button type="button" (click)="onClose()" color="accent">Anuluj</button>
+      <button mat-raised-button type="submit" color="accent" (click)="onSubmit()">Przypisz</button>
+    </div>
+  </gmp-dialog-content>
+</gmp-dialog>

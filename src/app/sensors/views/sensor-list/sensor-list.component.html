@@ -2,7 +2,7 @@
     <gmp-tab-header>
       Czujniki
     </gmp-tab-header>
-  
+
     <gmp-tab-content>
       <div class="table-wrapper">
         <table [dataSource]="sensorList" mat-table>
@@ -31,6 +31,9 @@
             <td *matCellDef="let element" mat-cell>
               <button (click)="sensorPresenter.onSensorDetailsClicked(element.id)" color="accent" mat-button>
                 Szczegóły
+              </button>
+              <button (click)="sensorPresenter.onAssignSensorClick(element.id)" color="accent" mat-button>
+                Przypisz
               </button>
             </td>
           </ng-container>

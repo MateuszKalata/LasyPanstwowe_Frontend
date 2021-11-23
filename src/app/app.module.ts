@@ -15,6 +15,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -32,11 +34,10 @@ import { TestComponentComponent } from './components/test-component/test-compone
 import { ForestryDetailsComponent } from './forestries/views/forestry-details/forestry-details.component';
 import { ForestryCreationFormComponent } from './forestries/views/forestry-creation-form/forestry-creation-form.component';
 import { SensorListComponent } from './sensors/views/sensor-list/sensor-list.component';
-import { MatListModule } from '@angular/material/list'
-import { MatGridListModule } from '@angular/material/grid-list';
 import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-details.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { SensorAssignmentFormComponent } from './sensors/views/sensor-assignment-form/sensor-assignment-form.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -60,7 +61,8 @@ export let AppInjector: Injector;
     ForestryDetailsComponent,
     ForestryCreationFormComponent,
     SensorListComponent,
-    SensorDetailsComponent
+    SensorDetailsComponent,
+    SensorAssignmentFormComponent,
   ],
   imports: [
     BrowserModule,

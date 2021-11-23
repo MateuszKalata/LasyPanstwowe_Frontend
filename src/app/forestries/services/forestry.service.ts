@@ -63,4 +63,9 @@ export class ForestryService {
     return this.httpClient.post(environment.apiUrl + '/forestareas', data,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)});
   }
+
+  public getForestAreasForForestry(forestryId: number): Observable<any> {
+    return this.httpClient.get<any>(environment.apiUrl + '/forestareas/' + forestryId,
+      {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)});
+  }
 }

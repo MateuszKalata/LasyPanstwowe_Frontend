@@ -4,4 +4,5 @@ export interface ISensorViews {
   showSensorList(sensorList: XSensor[]): void;
   showSensorDetails(sensor: XSensor) : void;
   showSensorListForForestry(sensorList: XSensor[]): void;
+  showSensorAssignmentForm(sensorId: number): void;
 }
