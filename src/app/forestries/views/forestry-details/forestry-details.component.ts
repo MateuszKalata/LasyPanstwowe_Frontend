@@ -23,7 +23,7 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   public forestryDetailsPresenter: ICreateForestArea & IShowForestryDetails;
   public forestryDetails: XForestryDetails | undefined;
 
-  public forestAreasColumns: string[] = ['name', 'surface'];
+  public forestAreasColumns: string[] = ['id', 'name', 'surface'];
   public forestAreasDataSource: MatTableDataSource<XForestArea> = new MatTableDataSource<XForestArea>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
 

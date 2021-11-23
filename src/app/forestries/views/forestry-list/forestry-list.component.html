@@ -15,6 +15,10 @@
       </div>
       <table *ngIf="forestryDataSource.data.length" [dataSource]="forestryDataSource" mat-table matSort matSortActive="name"
              matSortDirection="asc" matSortDisableClear>
+        <ng-container matColumnDef="id">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Id</th>
+          <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+        </ng-container>
         <ng-container matColumnDef="name">
           <th *matHeaderCellDef mat-header-cell mat-sort-header> Nazwa</th>
           <td *matCellDef="let element" mat-cell> {{element.name}} </td>

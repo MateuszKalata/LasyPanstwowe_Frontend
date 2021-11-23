@@ -19,7 +19,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./forestry-list.component.scss'],
 })
 export class ForestryListComponent implements OnInit, AfterViewInit, IForestryViews {
-  public displayedColumns: string[] = ['name', 'surface', 'actions'];
+  public displayedColumns: string[] = ['id', 'name', 'surface', 'actions'];
   public forestryPresenter: ICreateForestry & IShowForestryList;
   public forestryDataSource: MatTableDataSource<XForestry> = new MatTableDataSource<XForestry>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
