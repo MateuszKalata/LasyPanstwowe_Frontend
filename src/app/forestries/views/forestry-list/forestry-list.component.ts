@@ -3,15 +3,14 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {ForestryPresenter} from '../../presenters/forestry.presenter';
 import {IForestryViews} from '../interfaces/forestry-views.interface';
-import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
 import {XForestry} from '../../../models/forestry.model';
 import {ForestryCreationFormComponent} from '../forestry-creation-form/forestry-creation-form.component';
 import {ICreateForestry} from '../../presenters/interfaces/create-forestry.interface';
 import {IShowForestryList} from '../../presenters/interfaces/show-forestry-list.interface';
-import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'gmp-forestry-list',

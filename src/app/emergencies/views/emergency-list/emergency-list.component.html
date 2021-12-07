@@ -1,0 +1,38 @@
+<gmp-tab>
+  <gmp-tab-header>
+    Sytuacje kryzysowe
+  </gmp-tab-header>
+
+  <gmp-tab-content>
+    <div class="table-wrapper">
+      <table *ngIf="emergencyDataSource.data.length" [dataSource]="emergencyDataSource" mat-table matSort
+             matSortActive="emergency_status"
+             matSortDirection="asc" matSortDisableClear>
+        <ng-container matColumnDef="emergency_id">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Id</th>
+          <td *matCellDef="let element" mat-cell> {{element.emergency_id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="emergency_status">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+          <td *matCellDef="let element" mat-cell> {{element.emergency_status}} </td>
+        </ng-container>
+        <ng-container matColumnDef="emergency_type">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Typ</th>
+          <td *matCellDef="let element" mat-cell> {{element.emergency_type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
+          <td *matCellDef="let element" mat-cell>
+            <button [routerLink]="element.emergency_id" color="accent" mat-button>
+              Szczegóły
+            </button>
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr
+          *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+  </gmp-tab-content>
+</gmp-tab>
+

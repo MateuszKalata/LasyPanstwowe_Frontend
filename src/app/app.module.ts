@@ -38,6 +38,8 @@ import { SensorDetailsComponent } from './sensors/views/sensor-details/sensor-de
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { SensorAssignmentFormComponent } from './sensors/views/sensor-assignment-form/sensor-assignment-form.component';
+import { EmergencyListComponent } from './emergencies/views/emergency-list/emergency-list.component';
+import { EmergencyDetailsComponent } from './emergencies/views/emergency-details/emergency-details.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -63,6 +65,8 @@ export let AppInjector: Injector;
     SensorListComponent,
     SensorDetailsComponent,
     SensorAssignmentFormComponent,
+    EmergencyListComponent,
+    EmergencyDetailsComponent,
   ],
   imports: [
     BrowserModule,

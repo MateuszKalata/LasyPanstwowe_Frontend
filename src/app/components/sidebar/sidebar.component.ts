@@ -28,6 +28,11 @@ export class SidebarComponent implements OnInit {
       url: 'sensors',
       active: false,
     },
+    {
+      label: 'Sytuacje kryzysowe',
+      url: 'emergencies',
+      active: false,
+    },
   ];
 
   constructor(private router: Router) {

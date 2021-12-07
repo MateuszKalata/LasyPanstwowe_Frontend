@@ -1,0 +1,34 @@
+<gmp-tab>
+  <gmp-tab-header>
+    Szczegóły sytuacji kryzysowej
+  </gmp-tab-header>
+  <gmp-tab-content>
+    <div class="content-wrapper">
+      <h3>Lokalizacja:</h3>
+      <p>Szerokość geograficzna: <strong>{{emergencyDetails?.geolocation?.latitude}}</strong></p>
+      <p>Długość geograficzna: <strong>{{emergencyDetails?.geolocation?.longitude}}</strong></p>
+      <h3>Pomiary:</h3>
+      <div class="table-actions">
+        <button (click)="emergencyPresenter.onResolveEmergencyClicked(emergencyId ?? 0)"
+                color="accent"
+                mat-raised-button>
+          Rozwiąż sytuację kryzysową
+        </button>
+      </div>
+      <table *ngIf="measurementsDataSource.data.length" [dataSource]="measurementsDataSource" mat-table matSort
+             matSortActive="timestamp"
+             matSortDirection="asc" matSortDisableClear>
+        <ng-container matColumnDef="value">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Wartość</th>
+          <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+        </ng-container>
+        <ng-container matColumnDef="timestamp">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header> Data</th>
+          <td *matCellDef="let element" mat-cell> {{element.timestamp | date}} </td>
+        </ng-container>
+        <tr *matHeaderRowDef="measurementsColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: measurementsColumns;" mat-row></tr>
+      </table>
+    </div>
+  </gmp-tab-content>
+</gmp-tab>
