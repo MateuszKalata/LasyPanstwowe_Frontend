@@ -18,6 +18,7 @@ export class SensorPresenter implements IShowSensorList, IShowSensorDetails, IAs
     this.sensorService = AppInjector.get(SensorService);
     this.snackbar = AppInjector.get(MatSnackBar);
   }
+  
 
   public onSensorDetailsClicked(id: number): void {
     this.sensorService.getSensorDetails(id).subscribe((sensorDetails: XSensor) => {

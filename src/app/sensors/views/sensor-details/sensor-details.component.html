@@ -51,6 +51,23 @@
         </mat-list-item>
       </mat-list>
     </mat-grid-tile>
-
   </mat-grid-list>
+  <button style="float: right;"   color="accent"
+  mat-raised-button (click)="onSensorMeasurementClicked()">Wykres pomiarów</button>
+  <div *ngIf="buttonClicked">
+  <ngx-charts-line-chart  
+  [results]="chart" 
+  [view]="view"
+  [scheme]="colorScheme"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [timeline]="timeline"
+  >
+  </ngx-charts-line-chart>
+</div>
+
 </div>

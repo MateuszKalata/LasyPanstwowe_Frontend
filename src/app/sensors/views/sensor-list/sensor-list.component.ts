@@ -11,6 +11,7 @@ import {ISensorViews} from '../interfaces/sensor-views.interface';
 import {SensorDetailsComponent} from '../sensor-details/sensor-details.component';
 import {IAssignSensors} from '../../presenters/interfaces/assign-sensors.interface';
 import {SensorAssignmentFormComponent} from '../sensor-assignment-form/sensor-assignment-form.component';
+import { XSensorMeasurementList } from 'src/app/models/charts';
 
 @Component({
   selector: 'gmp-sensor-list',
@@ -33,6 +34,10 @@ export class SensorListComponent implements OnInit, ISensorViews {
               private sensorService: SensorService,
               private activatedRoute: ActivatedRoute) {
     this.sensorPresenter = new SensorPresenter(this);
+  }
+  
+  showMeasurements(sensorMeasurements: XSensorMeasurementList): void {
+    throw new Error('Method not implemented.');
   }
 
   public showSensorDetails(sensor: XSensor): void {
