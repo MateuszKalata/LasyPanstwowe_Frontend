@@ -1,42 +1,38 @@
-import {IShowEmergencyDetails} from './interfaces/show-emergency-details.interface';
-import {IResolveEmergency} from './interfaces/resolve-emergency.interface';
 import {IShowEmergencyList} from './interfaces/show-emergency-list.interface';
 import {AppInjector} from '../../app.module';
 import {IEmergencyViews} from '../views/interfaces/emergency-views.interface';
 import {EmergencyService} from '../services/emergency.service';
-import {IEmergencyDetailViews} from '../views/interfaces/emergency-detail-views.interface';
-import {XEmergencyNotificationDetails} from '../../models/emergency-notification-details.model';
-import {XEmergencyNotificationList} from '../../models/emergency-notification-list.model';
+import {IEmergencyNotification} from '../views/interfaces/emergency-notification.interface';
+import {XEmergencyNotification} from '../../models/emergency-notification.model';
 
-export class EmergencyPresenter implements IShowEmergencyDetails, IResolveEmergency, IShowEmergencyList {
-  public emergencyDetailViews: IEmergencyDetailViews | undefined;
+export class EmergencyPresenter implements IShowEmergencyList {
   public emergencyViews: IEmergencyViews | undefined;
+  public emergencyNotificationView: IEmergencyNotification | undefined;
   private emergencyService: EmergencyService;
 
-  constructor(emergencyViews?: IEmergencyViews) {
-    if (emergencyViews) {
-      this.emergencyViews = emergencyViews;
-    }
+  constructor(emergencyViews?: IEmergencyViews, emergencyNotificationView?: IEmergencyNotification) {
+    this.emergencyViews = emergencyViews;
+    this.emergencyNotificationView = emergencyNotificationView;
     this.emergencyService = AppInjector.get(EmergencyService);
-  }
-
-  public onEmergencyDetailsClicked(id: number): void {
-    this.emergencyService.getEmergencyNotification(id).subscribe((emergency: XEmergencyNotificationDetails) => {
-      this.emergencyDetailViews?.showEmergencyDetails(emergency);
-    });
+    this.observeEmergencyNotifications();
   }
 
   public onEmergencyListClicked(): void {
-    this.emergencyService.getEmergencyNotifications().subscribe((emergencies: XEmergencyNotificationList) => {
+    this.emergencyService.getEmergencyNotifications().subscribe((emergencies: XEmergencyNotification[]) => {
       this.emergencyViews?.showEmergencyList(emergencies);
     });
   }
 
-  public onResolveEmergencyClicked(id: number): void {
-    this.emergencyService.markEmergencyAsResolved(id).subscribe((value: number) => {
-      this.emergencyDetailViews?.showEmergencySuccessfullyResolvedMsg();
-    }, error => {
-      this.emergencyDetailViews?.showEmergencyAlreadyResolvedMsg();
+  public refreshEmergencyNotifications(notification: XEmergencyNotification[]): void {
+    this.emergencyNotificationView?.showEmergencyNotification(notification);
+    this.onEmergencyListClicked();
+  }
+
+  private observeEmergencyNotifications(): void {
+    this.emergencyService.emergencyNotificationSubject.subscribe((notification) => {
+      if (notification) {
+        this.refreshEmergencyNotifications(notification);
+      }
     });
   }
 

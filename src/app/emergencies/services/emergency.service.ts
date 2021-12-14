@@ -1,58 +1,48 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {Observable, of} from 'rxjs';
+import {Observable, BehaviorSubject, interval} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
-import {XEmergencyNotificationDetails} from '../../models/emergency-notification-details.model';
-import {XEmergencyNotificationList} from '../../models/emergency-notification-list.model';
+import {XEmergencyNotification} from '../../models/emergency-notification.model';
+import {environment} from '../../../environments/environment';
+import {getElementsPresentOnlyInFirstArray} from '../utils/array.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmergencyService {
-  private EMERGENCY_API_URL: string = '';
+  public emergencyNotificationSubject: BehaviorSubject<XEmergencyNotification[] | null> = new BehaviorSubject<XEmergencyNotification[] | null>(null);
+  private readonly AUTH_TOKEN: string = 'Basic YXBpOm5pZXNhbW93aWNpZXNrb21wbGlrb3dhbmVoYXNsbw==';
+  private emergencyNotificationList: XEmergencyNotification[] | null = null;
+  private EMERGENCY_API_URL: string = environment.apiUrl + '/emergencynotifications';
 
   constructor(private http: HttpClient) {
+    this.observeNewEmergencyNotification();
   }
 
-  public getEmergencyNotification(id: number): Observable<XEmergencyNotificationDetails> {
-    return of({
-      geolocation: {
-        latitude: 1,
-        longitude: 1,
-      },
-      measurements: [
-        {
-          measurement_id: 1,
-          sensor_id: 1,
-          timestamp: (new Date()).toString(),
-          value: 25,
-        },
-        {
-          measurement_id: 2,
-          sensor_id: 2,
-          timestamp: (new Date()).toString(),
-          value: 99,
-        },
-      ],
-    });
+  public getEmergencyNotification(id: number): Observable<XEmergencyNotification> {
+    return this.http.get<XEmergencyNotification>(this.EMERGENCY_API_URL + `/${id}`, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
   }
 
-  public getEmergencyNotifications(): Observable<XEmergencyNotificationList> {
-    return of({
-        notifications: [
-          {
-            emergency_id: 1,
-            emergency_status: 1,
-            emergency_type: 1,
-            sensor_id: 1,
-          },
-        ],
+  public getEmergencyNotifications(): Observable<XEmergencyNotification[]> {
+    return this.http.get<XEmergencyNotification[]>(this.EMERGENCY_API_URL, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
+  }
+
+  public markEmergencyAsResolved(id: number): Observable<any> {
+    return this.http.post(this.EMERGENCY_API_URL + `/${id}/resolve`, null, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
+  }
+
+  public observeNewEmergencyNotification(): void {
+    interval(3000).pipe(
+      switchMap(() => this.getEmergencyNotifications())
+    ).subscribe(res => {
+      const newEmergencyNotifications: XEmergencyNotification[] = this.emergencyNotificationList !== null ?
+        getElementsPresentOnlyInFirstArray(res, this.emergencyNotificationList) : [];
+      if (newEmergencyNotifications.length) {
+        this.emergencyNotificationSubject.next(newEmergencyNotifications);
       }
-    );
-  }
-
-  public markEmergencyAsResolved(id: number): Observable<number> {
-    return of(1);
+      this.emergencyNotificationList = res;
+    });
   }
 }

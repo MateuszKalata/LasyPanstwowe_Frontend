@@ -1,5 +1,5 @@
-import {XEmergencyNotificationList} from '../../../models/emergency-notification-list.model';
+import {XEmergencyNotification} from '../../../models/emergency-notification.model';
 
 export interface IEmergencyViews {
-  showEmergencyList(notifications: XEmergencyNotificationList): void;
+  showEmergencyList(notifications: XEmergencyNotification[]): void;
 }

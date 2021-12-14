@@ -1,7 +1,10 @@
 {
-  "forestationType" : {
-    "broadleaf": "Liściasty",
-    "coniferous": "Iglasty",
-    "mixed": "Mieszany"
+  "emergencyStatus" : {
+    "active": "Aktywna",
+    "resolved": "Rozwiązana"
+  },
+  "emergencyType": {
+    "fire": "Pożar",
+    "gale": "Wichura"
   }
 }

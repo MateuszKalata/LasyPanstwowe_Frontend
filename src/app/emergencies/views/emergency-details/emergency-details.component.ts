@@ -7,9 +7,9 @@ import {IEmergencyDetailViews} from '../interfaces/emergency-detail-views.interf
 import {XEmergencyNotificationDetails} from '../../../models/emergency-notification-details.model';
 import {IShowEmergencyDetails} from '../../presenters/interfaces/show-emergency-details.interface';
 import {IResolveEmergency} from '../../presenters/interfaces/resolve-emergency.interface';
-import {InjectorService} from '../../../injector.service';
 import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
-import {XSensorMeasurement} from '../../../models/sensor-measurement.model';
+import {EmergencyDetailsPresenter} from '../../presenters/emergency-details.presenter';
+import { EmergencyTypeEnum } from '../../enums/emergency-type.enum';
 
 @Component({
   selector: 'gmp-emergency-details',
@@ -20,14 +20,14 @@ export class EmergencyDetailsComponent implements OnInit, IEmergencyDetailViews 
   public emergencyDetails: XEmergencyNotificationDetails | undefined;
   public emergencyPresenter: IShowEmergencyDetails & IResolveEmergency;
   public emergencyId: number | undefined;
-  public measurementsDataSource: MatTableDataSource<XSensorMeasurement> = new MatTableDataSource<XSensorMeasurement>([]);
-  public measurementsColumns: string[] = ['value', 'timestamp'];
+  public measurementsDataSource: MatTableDataSource<XEmergencyNotificationDetails> = new MatTableDataSource<XEmergencyNotificationDetails>([]);
+  public measurementsColumns: string[] = ['emergency_value', 'emergency_timestamp'];
+  public EmergencyTypeEnum: typeof EmergencyTypeEnum = EmergencyTypeEnum;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
-              private injector: InjectorService,
               private activatedRoute: ActivatedRoute,
               private dialog: MatDialog) {
-    this.emergencyPresenter = this.injector.emergencyPresenter(this);
+    this.emergencyPresenter = new EmergencyDetailsPresenter(this);
   }
 
   public ngOnInit(): void {
@@ -43,14 +43,17 @@ export class EmergencyDetailsComponent implements OnInit, IEmergencyDetailViews 
 
   public showEmergencyDetails(details: XEmergencyNotificationDetails): void {
     this.emergencyDetails = details;
-    this.measurementsDataSource = new MatTableDataSource(details.measurements);
-    this.changeDetectorRef.detectChanges();
+    this.measurementsDataSource = new MatTableDataSource([details]);
   }
 
   public showEmergencySuccessfullyResolvedMsg(): void {
     const dialogRef: MatDialogRef<MessageDialogComponent> =
       this.dialog.open(MessageDialogComponent);
     dialogRef.componentInstance.message = 'Pomyślnie rozwiązano sytuację kryzysową.';
+  }
+
+  public onResolveEmergencyClicked(): void {
+    this.emergencyPresenter.onResolveEmergencyClicked(this.emergencyId ?? 0);
   }
 
 }

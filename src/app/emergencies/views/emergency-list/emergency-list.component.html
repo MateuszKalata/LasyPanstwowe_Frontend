@@ -5,20 +5,26 @@
 
   <gmp-tab-content>
     <div class="table-wrapper">
-      <table *ngIf="emergencyDataSource.data.length" [dataSource]="emergencyDataSource" mat-table matSort
-             matSortActive="emergency_status"
-             matSortDirection="asc" matSortDisableClear>
+      <mat-form-field color="accent">
+        <mat-label>Typ sytuacji kryzysowej</mat-label>
+        <mat-select [(value)]="filterValue" (selectionChange)="onFilterSelected($event.value)">
+          <mat-option  [value]="EmergencyStatusEnum.ACTIVE">Aktywne</mat-option>
+          <mat-option  [value]="EmergencyStatusEnum.RESOLVED">Rozwiązane</mat-option>
+          <mat-option  [value]="'all'">Wszystkie</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <table *ngIf="emergencyDataSource.data.length" [dataSource]="emergencyDataSource" mat-table>
         <ng-container matColumnDef="emergency_id">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Id</th>
+          <th *matHeaderCellDef mat-header-cell>Id</th>
           <td *matCellDef="let element" mat-cell> {{element.emergency_id}} </td>
         </ng-container>
         <ng-container matColumnDef="emergency_status">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
-          <td *matCellDef="let element" mat-cell> {{element.emergency_status}} </td>
+          <th *matHeaderCellDef mat-header-cell>Status</th>
+          <td *matCellDef="let element" mat-cell> {{'emergencyStatus.' + EmergencyStatusEnum[element.emergency_status].toLowerCase() | translate}} </td>
         </ng-container>
         <ng-container matColumnDef="emergency_type">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Typ</th>
-          <td *matCellDef="let element" mat-cell> {{element.emergency_type}}</td>
+          <th *matHeaderCellDef mat-header-cell>Typ</th>
+          <td *matCellDef="let element" mat-cell> {{'emergencyType.' + EmergencyTypeEnum[element.emergency_type].toLowerCase() | translate}}</td>
         </ng-container>
         <ng-container matColumnDef="actions">
           <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
