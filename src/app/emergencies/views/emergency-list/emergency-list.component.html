@@ -23,7 +23,7 @@
           <td *matCellDef="let element" mat-cell> {{'emergencyStatus.' + EmergencyStatusEnum[element.emergency_status].toLowerCase() | translate}} </td>
         </ng-container>
         <ng-container matColumnDef="emergency_type">
-          <th *matHeaderCellDef mat-header-cell>Typ</th>
+          <th *matHeaderCellDef mat-header-cell>Rodzaj sytuacji</th>
           <td *matCellDef="let element" mat-cell> {{'emergencyType.' + EmergencyTypeEnum[element.emergency_type].toLowerCase() | translate}}</td>
         </ng-container>
         <ng-container matColumnDef="emergency_timestamp">
