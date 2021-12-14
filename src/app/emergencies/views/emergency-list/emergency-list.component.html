@@ -26,6 +26,10 @@
           <th *matHeaderCellDef mat-header-cell>Typ</th>
           <td *matCellDef="let element" mat-cell> {{'emergencyType.' + EmergencyTypeEnum[element.emergency_type].toLowerCase() | translate}}</td>
         </ng-container>
+        <ng-container matColumnDef="emergency_timestamp">
+          <th *matHeaderCellDef mat-header-cell>Data zgłoszenia</th>
+          <td *matCellDef="let element" mat-cell> {{element.emergency_timestamp | date:'dd.MM.YYYY, H:mm'}}</td>
+        </ng-container>
         <ng-container matColumnDef="actions">
           <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
           <td *matCellDef="let element" mat-cell>

@@ -16,7 +16,7 @@ import {EmergencyTypeEnum} from '../../enums/emergency-type.enum';
 export class EmergencyListComponent implements IEmergencyViews, OnInit {
   public filterValue: string = 'all';
   public EmergencyStatusEnum: typeof EmergencyStatusEnum = EmergencyStatusEnum;
-  public displayedColumns: string[] = ['emergency_id', 'emergency_status', 'emergency_type', 'actions'];
+  public displayedColumns: string[] = ['emergency_id', 'emergency_status', 'emergency_type', 'emergency_timestamp', 'actions'];
   public emergencyDataSource: MatTableDataSource<XEmergencyNotification> = new MatTableDataSource<XEmergencyNotification>([]);
   public EmergencyTypeEnum: typeof EmergencyTypeEnum = EmergencyTypeEnum;
 
