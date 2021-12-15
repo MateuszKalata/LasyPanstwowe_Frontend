@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { XSensor } from 'src/app/models/sensor.model';
-import { chart } from 'src/app/models/charts';
+import { chart, XSensorMeasurement } from 'src/app/models/charts';
 import { IShowSensorDetails } from '../../presenters/interfaces/show-sensor-details.interface';
 import { SensorPresenter } from '../../presenters/sensors.presenter';
 import { IShowSensorList } from '../../presenters/interfaces/show-sensor-list.interface';
 import { IAssignSensors } from '../../presenters/interfaces/assign-sensors.interface';
+import { ISensorViews } from '../interfaces/sensor-views.interface';
 
 @Component({
     selector: 'gmp-sensor-details',
@@ -16,9 +17,10 @@ export class SensorDetailsComponent implements OnInit {
 
 // public sensorPresenter: IShowSensorList & IShowSensorDetails & IAssignSensors;
  public data : XSensor|undefined;
-    
+ public chart: any; 
+
   view: [number, number] = [700, 370];
-  chart: any[] | undefined;
+  // chart: any[] | undefined;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
@@ -36,7 +38,8 @@ export class SensorDetailsComponent implements OnInit {
 
     constructor() {
      // this.sensorPresenter = new SensorPresenter();
-        Object.assign(this, { chart });
+        // Object.assign(this, { chart });
+        
     }
 
     onSensorMeasurementClicked(){

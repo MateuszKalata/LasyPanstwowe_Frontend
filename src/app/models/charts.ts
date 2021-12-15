@@ -19,7 +19,10 @@ export var chart = [
     },
   ];
 
-  export interface XSensorMeasurementList {
-
+  export interface XSensorMeasurement {
+    id: number;
+    sensor_id: number;
+    timestamp: string|number;
+    value: number;
   }
   
