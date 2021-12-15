@@ -17,6 +17,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -96,6 +98,7 @@ export let AppInjector: Injector;
       },
     }),
     FormsModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

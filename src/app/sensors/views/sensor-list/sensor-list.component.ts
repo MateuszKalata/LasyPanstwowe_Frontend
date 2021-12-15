@@ -11,6 +11,7 @@ import {ISensorViews} from '../interfaces/sensor-views.interface';
 import {SensorDetailsComponent} from '../sensor-details/sensor-details.component';
 import {IAssignSensors} from '../../presenters/interfaces/assign-sensors.interface';
 import {SensorAssignmentFormComponent} from '../sensor-assignment-form/sensor-assignment-form.component';
+import { XSensorMeasurement } from 'src/app/models/charts';
 
 @Component({
   selector: 'gmp-sensor-list',
@@ -28,16 +29,30 @@ export class SensorListComponent implements OnInit, ISensorViews {
   ];
   public sensorPresenter: IShowSensorList & IShowSensorDetails & IAssignSensors;
   public sensorList: XSensor[] = [];
+  public dialogRef: MatDialogRef<SensorDetailsComponent>|null = null;
 
   constructor(private dialog: MatDialog,
               private sensorService: SensorService,
               private activatedRoute: ActivatedRoute) {
     this.sensorPresenter = new SensorPresenter(this);
   }
+  
+  public showMeasurements(sensorMeasurements: XSensorMeasurement[]): void {
+     this.dialogRef && (this.dialogRef.componentInstance.chart = [{
+        name: "Pomiary wartości sensora",
+        series: sensorMeasurements.map((item) => ({
+          name: item.timestamp,
+          value: item.value
+        }))
+    }]);
+     
+  }
 
   public showSensorDetails(sensor: XSensor): void {
     const dialogRef: MatDialogRef<SensorDetailsComponent> = this.dialog.open(SensorDetailsComponent);
     dialogRef.componentInstance.data = sensor;
+    this.dialogRef = dialogRef;
+    this.sensorPresenter.onSensorMeasurementsClicked(typeof sensor.id === 'string' ? parseInt(sensor.id) : sensor.id);
   }
 
   public showSensorAssignmentForm(sensorId: number): void {

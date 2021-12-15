@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {XSensor} from '../../models/sensor.model';
 import {environment} from '../../../environments/environment';
 import {trDate} from 'src/app/helpers/trDate';
+import { XSensorMeasurement } from 'src/app/models/charts';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,21 @@ export class SensorService {
         }));
       })
     );
+  }
+
+  public getSensorMeasurements(id: number): Observable<XSensorMeasurement[]|any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/measurements`,
+      {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
+        map((res : any[]) => {
+          const actualRes = res.filter((item) => item.sensor_id === id);
+          return actualRes.map((item) => ({
+            id: item.id,
+            sensor_id: item.sensor_id,
+            timestamp: (new Date(typeof item.timestamp === 'string' ? parseInt(item.timestamp+'000') : item.timestamp )).toISOString(),
+            value: item.value
+          }))
+        })
+      )
   }
 
   public getSensorDetails(id: number): Observable<XSensor> {

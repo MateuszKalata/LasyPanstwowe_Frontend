@@ -7,6 +7,7 @@ import {IShowSensorDetails} from './interfaces/show-sensor-details.interface';
 import {IShowSensorList} from './interfaces/show-sensor-list.interface';
 import {AppInjector} from 'src/app/app.module';
 import {IAssignSensors} from './interfaces/assign-sensors.interface';
+import { XSensorMeasurement } from 'src/app/models/charts';
 
 export class SensorPresenter implements IShowSensorList, IShowSensorDetails, IAssignSensors {
   public sensorViews: ISensorViews;
@@ -18,6 +19,7 @@ export class SensorPresenter implements IShowSensorList, IShowSensorDetails, IAs
     this.sensorService = AppInjector.get(SensorService);
     this.snackbar = AppInjector.get(MatSnackBar);
   }
+  
 
   public onSensorDetailsClicked(id: number): void {
     this.sensorService.getSensorDetails(id).subscribe((sensorDetails: XSensor) => {
@@ -26,7 +28,9 @@ export class SensorPresenter implements IShowSensorList, IShowSensorDetails, IAs
   }
 
   public onSensorMeasurementsClicked(id: number): void {
-    throw new Error('Method not implemented.');
+    this.sensorService.getSensorMeasurements(id).subscribe((measurements: XSensorMeasurement[]) => {
+      this.sensorViews.showMeasurements(measurements);
+    });
   }
 
   public onSensorForForestryClicked(id: number): void {
