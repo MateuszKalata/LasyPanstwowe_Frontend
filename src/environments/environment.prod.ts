@@ -1,4 +1,4 @@
 export const environment: any = {
   production: true,
-  apiUrl: 'https://lesnaprzygoda.herokuapp.com',
+  apiUrl: 'https://lasypanstwowe-api.herokuapp.com',
 };

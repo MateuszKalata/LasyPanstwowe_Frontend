@@ -33,12 +33,12 @@ export class AppComponent implements OnInit, IEmergencyNotification {
     notifications.forEach(notification => {
       const dialogRef: MatDialogRef<MessageDialogComponent> =
         this.dialog.open(MessageDialogComponent);
-      if (notification.emergency_type === EmergencyTypeEnum.FIRE) {
+      if (notification.sensor.type === EmergencyTypeEnum.FIRE || notification.sensor.type === EmergencyTypeEnum.TEMPERATURE) {
         dialogRef.componentInstance.message = 'Nowa sytuacja kryzysowa - pożar';
-      } else if (notification.emergency_type === EmergencyTypeEnum.GALE) {
+      } else if (notification.sensor.type === EmergencyTypeEnum.WIND) {
         dialogRef.componentInstance.message = 'Nowa sytuacja kryzysowa - wichura';
       } else {
-        dialogRef.componentInstance.message = 'Nowa sytuacja kryzysowa - ' + notification.emergency_type;
+        dialogRef.componentInstance.message = 'Nowa sytuacja kryzysowa, nieznany typ sytuacji: - ' + notification.sensor.type;
       }
     });
   }

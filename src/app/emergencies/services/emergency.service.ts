@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable, BehaviorSubject, interval} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, map} from 'rxjs/operators';
 
 import {XEmergencyNotification} from '../../models/emergency-notification.model';
 import {environment} from '../../../environments/environment';
@@ -26,7 +26,12 @@ export class EmergencyService {
   }
 
   public getEmergencyNotifications(): Observable<XEmergencyNotification[]> {
-    return this.http.get<XEmergencyNotification[]>(this.EMERGENCY_API_URL, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
+    return this.http.get<XEmergencyNotification[]>(this.EMERGENCY_API_URL, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)}).pipe(
+      map((res) => {
+        res.forEach(emergency => emergency.timestamp = emergency.timestamp + 'Z');
+        return res;
+      })
+    );
   }
 
   public markEmergencyAsResolved(id: number): Observable<any> {

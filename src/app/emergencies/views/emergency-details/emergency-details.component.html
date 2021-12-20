@@ -6,22 +6,24 @@
     <div class="content-wrapper" *ngIf="emergencyDetails">
       <button (click)="onResolveEmergencyClicked()"
               color="accent"
-              mat-raised-button>
+              mat-raised-button *ngIf="emergencyDetails.emergency_status === EmergencyStatusEnum.ACTIVE">
         Rozwiąż sytuację kryzysową
       </button>
-      <h3>Typ: {{'emergencyType.' + EmergencyTypeEnum[emergencyDetails.emergency_type].toLowerCase() | translate}}</h3>
-      <h3>Id sensora: {{emergencyDetails.sensor_id}}</h3>
+      <h3>Typ: {{'emergencyType.' + emergencyDetails.sensor.type | translate}}</h3>
+      <h3>Status: {{'emergencyStatus.' + EmergencyStatusEnum[emergencyDetails.emergency_status].toLowerCase() | translate}}</h3>
+      <h3>Lokalizacja czujnika: {{'Szerokość: ' + emergencyDetails.sensor?.latitude + ', ' + 'Długość: ' + emergencyDetails.sensor?.longitude}}</h3>
+      <h3>Id czujnika: {{emergencyDetails.sensor.id}}</h3>
       <h3>Pomiary:</h3>
       <div class="table-actions">
       </div>
       <table *ngIf="measurementsDataSource.data.length" [dataSource]="measurementsDataSource" mat-table>
-        <ng-container matColumnDef="emergency_value">
+        <ng-container matColumnDef="value">
           <th *matHeaderCellDef mat-header-cell>Wartość</th>
-          <td *matCellDef="let element" mat-cell> {{element.emergency_value}} </td>
+          <td *matCellDef="let element" mat-cell> {{element.value + ' ' + emergencyDetails.sensor?.unit}} </td>
         </ng-container>
-        <ng-container matColumnDef="emergency_timestamp">
-          <th *matHeaderCellDef mat-header-cell> Data</th>
-          <td *matCellDef="let element" mat-cell> {{element.emergency_timestamp | date:'dd.MM.YYYY, H:mm'}} </td>
+        <ng-container matColumnDef="timestamp">
+          <th *matHeaderCellDef mat-header-cell>Data</th>
+          <td *matCellDef="let element" mat-cell> {{element.timestamp | date:'dd.MM.YYYY, H:mm'}} </td>
         </ng-container>
         <tr *matHeaderRowDef="measurementsColumns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: measurementsColumns;" mat-row></tr>

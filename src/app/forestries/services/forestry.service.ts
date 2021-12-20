@@ -49,7 +49,11 @@ export class ForestryService {
   }
 
   public createForestry(forestry: XForestry): Observable<any> {
-    return this.httpClient.post(environment.apiUrl + '/forestries', forestry,
+    const data: any = {
+      name: forestry.name,
+      surface: forestry.surface.toString(),
+    };
+    return this.httpClient.post(environment.apiUrl + '/forestries', data,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)});
   }
 

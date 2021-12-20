@@ -1,4 +1,5 @@
 export enum EmergencyTypeEnum {
-  FIRE = 1,
-  GALE = 2,
+  FIRE = 'fire',
+  TEMPERATURE = 'temperature',
+  WIND = 'wind',
 }

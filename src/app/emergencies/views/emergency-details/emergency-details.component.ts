@@ -4,12 +4,13 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 
 import {IEmergencyDetailViews} from '../interfaces/emergency-detail-views.interface';
-import {XEmergencyNotificationDetails} from '../../../models/emergency-notification-details.model';
 import {IShowEmergencyDetails} from '../../presenters/interfaces/show-emergency-details.interface';
 import {IResolveEmergency} from '../../presenters/interfaces/resolve-emergency.interface';
 import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
 import {EmergencyDetailsPresenter} from '../../presenters/emergency-details.presenter';
-import { EmergencyTypeEnum } from '../../enums/emergency-type.enum';
+import {XEmergencyMeasurement} from '../../../models/emergency-measurement.model';
+import {XEmergencyNotification} from '../../../models/emergency-notification.model';
+import {EmergencyStatusEnum} from '../../enums/emergency-status.enum';
 
 @Component({
   selector: 'gmp-emergency-details',
@@ -17,12 +18,12 @@ import { EmergencyTypeEnum } from '../../enums/emergency-type.enum';
   styleUrls: ['./emergency-details.component.scss'],
 })
 export class EmergencyDetailsComponent implements OnInit, IEmergencyDetailViews {
-  public emergencyDetails: XEmergencyNotificationDetails | undefined;
+  public emergencyDetails: XEmergencyNotification | undefined;
   public emergencyPresenter: IShowEmergencyDetails & IResolveEmergency;
   public emergencyId: number | undefined;
-  public measurementsDataSource: MatTableDataSource<XEmergencyNotificationDetails> = new MatTableDataSource<XEmergencyNotificationDetails>([]);
-  public measurementsColumns: string[] = ['emergency_value', 'emergency_timestamp'];
-  public EmergencyTypeEnum: typeof EmergencyTypeEnum = EmergencyTypeEnum;
+  public measurementsDataSource: MatTableDataSource<XEmergencyMeasurement> = new MatTableDataSource<XEmergencyMeasurement>([]);
+  public measurementsColumns: string[] = ['value', 'timestamp'];
+  public EmergencyStatusEnum: typeof EmergencyStatusEnum = EmergencyStatusEnum;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private activatedRoute: ActivatedRoute,
@@ -41,9 +42,9 @@ export class EmergencyDetailsComponent implements OnInit, IEmergencyDetailViews 
     dialogRef.componentInstance.message = 'Błąd! Sytuacja kryzysowa jest już rozwiązana.';
   }
 
-  public showEmergencyDetails(details: XEmergencyNotificationDetails): void {
+  public showEmergencyDetails(details: XEmergencyNotification): void {
     this.emergencyDetails = details;
-    this.measurementsDataSource = new MatTableDataSource([details]);
+    this.measurementsDataSource = new MatTableDataSource(details.measurements);
   }
 
   public showEmergencySuccessfullyResolvedMsg(): void {

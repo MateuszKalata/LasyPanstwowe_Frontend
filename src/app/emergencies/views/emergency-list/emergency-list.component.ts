@@ -6,7 +6,6 @@ import {EmergencyPresenter} from '../../presenters/emergency.presenter';
 import {IEmergencyViews} from '../interfaces/emergency-views.interface';
 import {XEmergencyNotification} from '../../../models/emergency-notification.model';
 import {EmergencyStatusEnum} from '../../enums/emergency-status.enum';
-import {EmergencyTypeEnum} from '../../enums/emergency-type.enum';
 
 @Component({
   selector: 'gmp-emergency-list',
@@ -16,9 +15,8 @@ import {EmergencyTypeEnum} from '../../enums/emergency-type.enum';
 export class EmergencyListComponent implements IEmergencyViews, OnInit {
   public filterValue: string = 'all';
   public EmergencyStatusEnum: typeof EmergencyStatusEnum = EmergencyStatusEnum;
-  public displayedColumns: string[] = ['emergency_id', 'emergency_status', 'emergency_type', 'emergency_timestamp', 'actions'];
+  public displayedColumns: string[] = ['emergency_id', 'emergency_status', 'emergency_type', 'localization_name', 'emergency_timestamp', 'actions'];
   public emergencyDataSource: MatTableDataSource<XEmergencyNotification> = new MatTableDataSource<XEmergencyNotification>([]);
-  public EmergencyTypeEnum: typeof EmergencyTypeEnum = EmergencyTypeEnum;
 
   private emergencyPresenter: IShowEmergencyList | undefined;
 

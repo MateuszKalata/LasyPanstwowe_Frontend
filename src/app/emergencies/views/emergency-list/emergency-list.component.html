@@ -24,11 +24,15 @@
         </ng-container>
         <ng-container matColumnDef="emergency_type">
           <th *matHeaderCellDef mat-header-cell>Rodzaj sytuacji</th>
-          <td *matCellDef="let element" mat-cell> {{'emergencyType.' + EmergencyTypeEnum[element.emergency_type].toLowerCase() | translate}}</td>
+          <td *matCellDef="let element" mat-cell> {{'emergencyType.' + element.sensor?.type | translate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="localization_name">
+          <th *matHeaderCellDef mat-header-cell>Lokalizacja</th>
+          <td *matCellDef="let element" mat-cell> {{element.forestry_name +  '/'  + element.forest_area_name}}</td>
         </ng-container>
         <ng-container matColumnDef="emergency_timestamp">
           <th *matHeaderCellDef mat-header-cell>Data zgłoszenia</th>
-          <td *matCellDef="let element" mat-cell> {{element.emergency_timestamp | date:'dd.MM.YYYY, H:mm'}}</td>
+          <td *matCellDef="let element" mat-cell> {{element.timestamp | date:'dd.MM.YYYY, H:mm'}}</td>
         </ng-container>
         <ng-container matColumnDef="actions">
           <th *matHeaderCellDef class="actions-column" mat-header-cell></th>

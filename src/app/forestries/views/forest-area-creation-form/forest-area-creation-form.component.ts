@@ -30,7 +30,7 @@ export class ForestAreaCreationFormComponent implements OnInit {
     if (this.newForestAreaFormGroup.valid) {
       const data: XForestArea = {
         name: this.newForestAreaFormGroup.controls.name.value,
-        surface: this.newForestAreaFormGroup.controls.surface.value + ' ha',
+        surface: this.newForestAreaFormGroup.controls.surface.value.toString(),
       };
 
       if (this.forestationTypes.length > 0) {

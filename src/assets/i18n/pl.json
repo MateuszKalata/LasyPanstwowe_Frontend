@@ -5,6 +5,7 @@
   },
   "emergencyType": {
     "fire": "Pożar",
-    "gale": "Wichura"
+    "wind": "Wichura",
+    "temperature": "Pożar"
   }
 }
