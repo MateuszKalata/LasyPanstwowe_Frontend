@@ -60,7 +60,7 @@ export class SensorService {
           return actualRes.map((item) => ({
             id: item.id,
             sensor_id: item.sensor_id,
-            timestamp: (new Date(typeof item.timestamp === 'string' ? parseInt(item.timestamp+'000') : item.timestamp )).toISOString(),
+            timestamp: item.timestamp, //(new Date(typeof item.timestamp === 'string' ? parseInt(item.timestamp+'000') : item.timestamp )).toISOString(),
             value: item.value
           }))
         })
