@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { XForestAction } from "src/app/models/forest-action.model";
 import { ForestActionStatusEnum } from "../../enums/forest-action-status.enum";
@@ -16,7 +17,7 @@ import { IForestActionViews } from "../interfaces/forest-action-views.interface"
 })
 
 export class ForestActionListComponent implements OnInit, IForestActionViews {
-    public actionList: XForestAction[] = [];
+    public actionList: MatTableDataSource<XForestAction> = new MatTableDataSource<XForestAction>([]);
     public filterValue: string = 'all';
     public ForestActionTypeEnum = ForestActionTypeEnum;
     public ForestActionStatusEnum = ForestActionStatusEnum;
@@ -25,7 +26,6 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
 
     constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
         this.activatedRoute = activatedRoute;
-        console.log(activatedRoute);
         this.presenter = new ForestActionPresenter(this);
     }
 
@@ -40,10 +40,14 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
         throw new Error("Method not implemented.");
     }
     showForestActionList(data: XForestAction[]): void {
-        this.actionList = data;
+        this.actionList = new MatTableDataSource<XForestAction>(data);
+        this.actionList.filterPredicate = (data, filter: string): boolean => {
+            return data.type.toLowerCase().includes(filter.toLowerCase());
+        }
+        this.onFilterSelected(this.filterValue)
     }
 
     public onFilterSelected(value: any): void {
-        console.log(value)
-      }
+        this.actionList.filter = value === 'all' ? '' : value;
+    }
 }
