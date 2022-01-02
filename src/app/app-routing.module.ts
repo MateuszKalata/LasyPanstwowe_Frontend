@@ -6,6 +6,7 @@ import {ForestryDetailsComponent} from './forestries/views/forestry-details/fore
 import {SensorListComponent} from './sensors/views/sensor-list/sensor-list.component';
 import {EmergencyListComponent} from './emergencies/views/emergency-list/emergency-list.component';
 import {EmergencyDetailsComponent} from './emergencies/views/emergency-details/emergency-details.component';
+import { ForestActionListComponent } from './forest-actions/views/forest-action-list/forest-action-list.component';
 
 const routes: Routes = [
   {path: 'forestries', component: ForestryListComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'emergencies/:id', component: EmergencyDetailsComponent},
   {path: 'sensors', component: SensorListComponent},
   {path: 'sensors/:id', component: SensorListComponent},
+  {path: 'forestries/:id/actions', component: ForestActionListComponent}
 ];
 
 @NgModule({

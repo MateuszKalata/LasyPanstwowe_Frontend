@@ -89,6 +89,10 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
     this.router.navigate([`sensors/${this.forestryDetails?.id}`]);
   }
 
+  public showActionsForForestry(): void {
+    this.router.navigate([`forestries/${this.forestryDetails?.id}/actions`]);
+  }
+
   private measureAreasSurface(): number {
     let surface: number = 0;
     this.forestryDetails?.forestAreas?.forEach((area: XForestArea) => {
