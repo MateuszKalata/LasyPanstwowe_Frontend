@@ -19,19 +19,19 @@ export class ForestActionPresenter implements IShowForestActionList, IShowForest
         this.snackbar = AppInjector.get(MatSnackBar);
     }
     
-    onCreateForestActionClicked(): void {
+    public onCreateForestActionClicked(): void {
         throw new Error("Method not implemented.");
     }
-    onShowForestActionListClicked(id: number): void {
+    public onShowForestActionListClicked(id: number): void {
         throw new Error("Method not implemented.");
     }
-    onShowForestActionDetailsClicked(id: number): void {
+    public onShowForestActionDetailsClicked(id: number): void {
         throw new Error("Method not implemented.");
     }
-    onMarkAsDoneClicked(id: number): void {
+    public onMarkAsDoneClicked(id: number): void {
         throw new Error("Method not implemented.");
     }
-    onForestActionSave(action: XForestAction): void {
+    public onForestActionSave(action: XForestAction): void {
         throw new Error("Method not implemented.");
     }
     

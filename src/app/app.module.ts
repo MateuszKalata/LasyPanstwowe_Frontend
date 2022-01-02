@@ -42,6 +42,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { SensorAssignmentFormComponent } from './sensors/views/sensor-assignment-form/sensor-assignment-form.component';
 import { EmergencyListComponent } from './emergencies/views/emergency-list/emergency-list.component';
 import { EmergencyDetailsComponent } from './emergencies/views/emergency-details/emergency-details.component';
+import { ForestActionListComponent } from './forest-actions/views/forest-action-list/forest-action-list.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -69,6 +70,7 @@ export let AppInjector: Injector;
     SensorAssignmentFormComponent,
     EmergencyListComponent,
     EmergencyDetailsComponent,
+    ForestActionListComponent
   ],
   imports: [
     BrowserModule,

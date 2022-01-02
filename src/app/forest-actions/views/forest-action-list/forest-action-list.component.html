@@ -1,0 +1,55 @@
+<gmp-tab>
+    <gmp-tab-header>
+      Akcje leśne
+    </gmp-tab-header>
+  
+    <gmp-tab-content>
+      <div class="table-wrapper">
+        <mat-form-field color="accent">
+          <mat-label>Typ akcji leśnej</mat-label>
+          <mat-select [(value)]="filterValue" (selectionChange)="onFilterSelected($event.value)">
+            <mat-option  [value]="ForestActionTypeEnum.ADD">Zalesienie</mat-option>
+            <mat-option  [value]="ForestActionTypeEnum.DELETE">Wycinka</mat-option>
+            <mat-option  [value]="'all'">Wszystkie</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <table [dataSource]="actionList" mat-table>
+            <ng-container matColumnDef="id">
+              <th *matHeaderCellDef mat-header-cell> Id</th>
+              <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+              <th *matHeaderCellDef mat-header-cell> Typ akcji</th>
+              <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th *matHeaderCellDef mat-header-cell> Status</th>
+                <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+              </ng-container>
+            <ng-container matColumnDef="startDate">
+              <th *matHeaderCellDef mat-header-cell> Data rozpoczęcia</th>
+              <td *matCellDef="let element" mat-cell> {{element.startDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="endDate">
+                <th *matHeaderCellDef mat-header-cell> Data zakończenia</th>
+                <td *matCellDef="let element" mat-cell> {{element.endDate}} </td>
+              </ng-container>
+            <ng-container matColumnDef="actions">
+              <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
+              <td *matCellDef="let element" mat-cell>
+                <button (click)="presenter.onShowForestActionListClicked(element.id)" color="accent" mat-button>
+                  Szczegóły
+                </button>
+                <button *ngIf="element.status === ForestActionStatusEnum.PLANNED" (click)="presenter.onMarkAsDoneClicked(element.id)" color="accent" mat-button>
+                  Wykonaj
+                </button>
+              </td>
+            </ng-container>
+            <tr *matHeaderRowDef="columns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+          </table>
+      </div>
+    </gmp-tab-content>
+  </gmp-tab>
+  
+  
