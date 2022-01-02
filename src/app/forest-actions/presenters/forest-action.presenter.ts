@@ -23,7 +23,9 @@ export class ForestActionPresenter implements IShowForestActionList, IShowForest
         throw new Error("Method not implemented.");
     }
     public onShowForestActionListClicked(id: number): void {
-        throw new Error("Method not implemented.");
+        const data = this.forestActionService.getForestActions(id);
+        console.log(data);
+        this.forestActionViews.showForestActionList(data);
     }
     public onShowForestActionDetailsClicked(id: number): void {
         throw new Error("Method not implemented.");

@@ -1,14 +1,14 @@
 export interface XForestAction {
-    additionalInfo: string;
+    additionalInfo?: string;
     endDate: string;
     forestAreaId: number;
-    forestationTypeId: number;
+    forestationTypeId?: number;
     id: number;
-    numberOfTreesToProceed: number;
-    special_condition: string;
+    numberOfTreesToProceed?: number;
+    special_condition?: string;
     startDate: string;
     status: string;
-    teamLeader: string;
-    teamSize: string;
+    teamLeader?: string;
+    teamSize?: string;
     type: string;
 }

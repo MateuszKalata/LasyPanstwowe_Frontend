@@ -23,11 +23,14 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
     public columns: string[] = ['id', 'type', 'status', 'startDate', 'endDate', 'actions']
     public presenter: IShowForestActionList & IMarkForestActionAsDone;
 
-    constructor(private dialod: MatDialog) {
+    constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+        this.activatedRoute = activatedRoute;
+        console.log(activatedRoute);
         this.presenter = new ForestActionPresenter(this);
     }
 
     ngOnInit(): void {
+        this.presenter.onShowForestActionListClicked(this.activatedRoute.snapshot.params.id);
         throw new Error("Method not implemented.");
     }
     showForestActionCreateFailureMessage(): void {
@@ -37,7 +40,7 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
         throw new Error("Method not implemented.");
     }
     showForestActionList(data: XForestAction[]): void {
-        throw new Error("Method not implemented.");
+        this.actionList = data;
     }
 
     public onFilterSelected(value: any): void {
