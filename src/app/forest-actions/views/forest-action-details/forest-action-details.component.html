@@ -5,7 +5,7 @@
   <gmp-dialog-content>
     <div *ngIf="forestAction">
     <h3>Rodzaj akcji</h3>
-    <p>{{forestAction.type}}</p>
+    <p>{{'forestActionType.' + forestAction.type | translate}}</p>
 
     <h3>Obszar leśny</h3>
     <p>{{forestAction.forest_area_id}}</p>
