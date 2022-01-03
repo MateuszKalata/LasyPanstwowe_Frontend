@@ -28,19 +28,19 @@
             </ng-container>
             <ng-container matColumnDef="type">
               <th *matHeaderCellDef mat-header-cell> Typ akcji</th>
-              <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+              <td *matCellDef="let element" mat-cell> {{'forestActionType.' + element.type | translate}} </td>
             </ng-container>
             <ng-container matColumnDef="status">
                 <th *matHeaderCellDef mat-header-cell> Status</th>
-                <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+                <td *matCellDef="let element" mat-cell> {{ 'forestActionStatus.'+ element.status |translate}} </td>
               </ng-container>
             <ng-container matColumnDef="startDate">
               <th *matHeaderCellDef mat-header-cell> Data rozpoczęcia</th>
-              <td *matCellDef="let element" mat-cell> {{element.startDate}} </td>
+              <td *matCellDef="let element" mat-cell> {{element.start_date | date:'dd.MM.YYYY'}} </td>
             </ng-container>
             <ng-container matColumnDef="endDate">
                 <th *matHeaderCellDef mat-header-cell> Data zakończenia</th>
-                <td *matCellDef="let element" mat-cell> {{element.endDate}} </td>
+                <td *matCellDef="let element" mat-cell> {{element.end_date | date:'dd.MM.YYYY'}} </td>
               </ng-container>
             <ng-container matColumnDef="actions">
               <th *matHeaderCellDef class="actions-column" mat-header-cell></th>

@@ -29,13 +29,14 @@ export class ForestActionPresenter implements IShowForestActionList, IShowForest
     }
     public onShowForestActionListClicked(id: number): void {
         this.forestryId = id;
-        const data = this.forestActionService.getForestActions(id);
-        console.log(data);
-        this.forestActionViews?.showForestActionList(data);
+      this.forestActionService.getForestActions(id).subscribe((forestActions) => {
+        this.forestActionViews?.showForestActionList(forestActions);
+      });
     }
     public onShowForestActionDetailsClicked(id: number): void {
-        const data: XForestAction = this.forestActionService.getForestAction(id);
-        this.forestActionDetailsViews?.showForestActionDetails(data);
+        this.forestActionService.getForestAction(id).subscribe((forestAction) => {
+          this.forestActionDetailsViews?.showForestActionDetails(forestAction);
+        });
     }
     public onMarkAsDoneClicked(id: number): void {
       this.forestActionService.updateForestAction(id).subscribe(() => {

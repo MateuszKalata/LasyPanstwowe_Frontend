@@ -1,40 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
-import { trDate } from 'src/app/helpers/trDate';
 import { XForestAction } from 'src/app/models/forest-action.model';
-
-const mockedForestActionList = (id: number): XForestAction[] => ([
-    {
-        id: 1,
-        type: 'zalesienie',
-        status: 'wykonane',
-        startDate: trDate((new Date(0)).toISOString(), 'DD.mm.YYYY HH:MM'),
-        endDate: trDate((new Date()).toISOString(), 'DD.mm.YYYY HH:MM'),
-        forestAreaId: id,
-        teamLeader: 'Leśniczy',
-        teamSize: 3,
-        numberOfTreesToProceed: 2,
-        treeType: 'Buk',
-    },
-    {
-        id: 2,
-        type: 'wycinka',
-        status: 'zaplanowane',
-        startDate: trDate((new Date(0)).toISOString(), 'DD.mm.YYYY HH:MM'),
-        endDate: trDate((new Date()).toISOString(), 'DD.mm.YYYY HH:MM'),
-        forestAreaId: id,
-    },
-]);
+import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 
 export class ForestActionService {
-    private readonly AUTH_TOKEN_HARDCODED: string = 'Basic YXBpOm5pZXNhbW93aWNpZXNrb21wbGlrb3dhbmVoYXNsbw==';
+    private readonly AUTH_TOKEN: string = 'Basic YXBpOm5pZXNhbW93aWNpZXNrb21wbGlrb3dhbmVoYXNsbw==';
+    private FOREST_ACTION_API_URL: string = environment.apiUrl2 + '/forestaction';
 
     constructor(private httpClient: HttpClient) {
 
@@ -44,15 +22,15 @@ export class ForestActionService {
 
     }
 
-    public getForestAction(actionId: number): XForestAction {// Observable<XForestAction> {
-      return mockedForestActionList(1)[0];
+    public getForestAction(actionId: number): Observable<XForestAction> {
+      return this.httpClient.get<XForestAction>(this.FOREST_ACTION_API_URL + `/${actionId}`, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
     }
 
-    public getForestActions(forestryId: number): any {// Observable<XForestAction[]> {
-        return mockedForestActionList(forestryId);
+    public getForestActions(forestryId: number): Observable<XForestAction[]> {
+        return this.httpClient.get<XForestAction[]>(this.FOREST_ACTION_API_URL + 's', {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
     }
 
     public updateForestAction(id: number): Observable<any> {
-      return of({});
+      return this.httpClient.patch(this.FOREST_ACTION_API_URL + `/${id}/finish`, {}, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
     }
 }

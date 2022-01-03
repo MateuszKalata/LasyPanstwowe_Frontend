@@ -1,4 +1,4 @@
 export enum ForestActionStatusEnum {
-    PLANNED = 'zaplanowane',
-    DONE = 'wykonane'
+    PLANNED = 'active',
+    DONE = 'finished',
 }
