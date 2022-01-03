@@ -46,7 +46,15 @@
         </ng-container>
         <ng-container matColumnDef="surface">
           <th *matHeaderCellDef mat-header-cell mat-sort-header>Powierzchnia</th>
-          <td *matCellDef="let element" mat-cell> {{element.surface}}</td>
+          <td *matCellDef="let element" mat-cell> {{element.surface}} ha</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef class="actions-column" mat-header-cell></th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="onForestryAreaDetailsClicked(element)" color="accent" mat-button>
+              Szczegóły
+            </button>
+          </td>
         </ng-container>
         <tr *matHeaderRowDef="forestAreasColumns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: forestAreasColumns;" mat-row></tr>

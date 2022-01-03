@@ -1,17 +1,23 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { trDate } from "src/app/helpers/trDate";
-import { XForestAction } from "src/app/models/forest-action.model";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import {Observable, of} from 'rxjs';
+
+import { trDate } from 'src/app/helpers/trDate';
+import { XForestAction } from 'src/app/models/forest-action.model';
 
 const mockedForestActionList = (id: number): XForestAction[] => ([
     {
         id: 1,
         type: 'zalesienie',
-        status: "wykonane",
+        status: 'wykonane',
         startDate: trDate((new Date(0)).toISOString(), 'DD.mm.YYYY HH:MM'),
         endDate: trDate((new Date()).toISOString(), 'DD.mm.YYYY HH:MM'),
-        forestAreaId: id
+        forestAreaId: id,
+        teamLeader: 'Leśniczy',
+        teamSize: 3,
+        numberOfTreesToProceed: 2,
+        treeType: 'Buk',
     },
     {
         id: 2,
@@ -19,34 +25,34 @@ const mockedForestActionList = (id: number): XForestAction[] => ([
         status: 'zaplanowane',
         startDate: trDate((new Date(0)).toISOString(), 'DD.mm.YYYY HH:MM'),
         endDate: trDate((new Date()).toISOString(), 'DD.mm.YYYY HH:MM'),
-        forestAreaId: id
-    }
-])
+        forestAreaId: id,
+    },
+]);
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 
 export class ForestActionService {
     private readonly AUTH_TOKEN_HARDCODED: string = 'Basic YXBpOm5pZXNhbW93aWNpZXNrb21wbGlrb3dhbmVoYXNsbw==';
 
     constructor(private httpClient: HttpClient) {
-        
-    }
-
-    public createForestAction(data: XForestAction): any {//Observable<number> {
-        
-    }
-
-    public getForestAction(actionId: number): any {//Observable<XForestAction> {
 
     }
 
-    public getForestActions(forestryId: number): any {//Observable<XForestAction[]> {
+    public createForestAction(data: XForestAction): any {// Observable<number> {
+
+    }
+
+    public getForestAction(actionId: number): XForestAction {// Observable<XForestAction> {
+      return mockedForestActionList(1)[0];
+    }
+
+    public getForestActions(forestryId: number): any {// Observable<XForestAction[]> {
         return mockedForestActionList(forestryId);
     }
 
-    public updateForestAction(action: XForestAction): any {//Observable<number> {
-
+    public updateForestAction(id: number): Observable<any> {
+      return of({});
     }
 }

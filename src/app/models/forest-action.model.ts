@@ -9,6 +9,7 @@ export interface XForestAction {
     startDate: string;
     status: string;
     teamLeader?: string;
-    teamSize?: string;
+    teamSize?: number;
     type: string;
+    treeType?: string;
 }

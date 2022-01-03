@@ -1,0 +1,27 @@
+<gmp-dialog>
+  <gmp-dialog-header>
+    Szczegóły akcji leśnej
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <div *ngIf="forestAction">
+    <h3>Rodzaj akcji</h3>
+    <p>{{forestAction.type}}</p>
+
+    <h3>Obszar leśny</h3>
+    <p>{{forestAction.forestAreaId}}</p>
+
+    <h3>Termin</h3>
+    <p>{{forestAction.startDate | date:'dd.MM.YYYY'}} - {{forestAction.endDate | date:'dd.MM.YYYY'}}</p>
+
+    <h3>Gatunek drzewa</h3>
+    <p>{{forestAction.treeType}}, {{forestAction.numberOfTreesToProceed}} sztuk</p>
+
+    <h3>Koordynator akcji</h3>
+    <p>{{forestAction.teamLeader}}</p>
+
+    <h3>Rozmiar zespołu</h3>
+    <p>{{forestAction.teamSize}}</p>
+    </div>
+  </gmp-dialog-content>
+</gmp-dialog>
+
