@@ -1,8 +1,10 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { trDate } from "src/app/helpers/trDate";
 import { XForestAction } from "src/app/models/forest-action.model";
+import { environment } from "src/environments/environment";
+import { map } from 'rxjs/operators';
 
 const mockedForestActionList = (id: number): XForestAction[] => ([
     {
@@ -42,8 +44,27 @@ export class ForestActionService {
 
     }
 
-    public getForestActions(forestryId: number): any {//Observable<XForestAction[]> {
-        return mockedForestActionList(forestryId);
+    public getForestActions(forestAreaId: number): Observable<XForestAction[]> {
+        // return mockedForestActionList(forestAreaId);
+        console.log("qwe")
+        return this.httpClient.get<any[]>(environment.apiUrl + `/forestactions`,
+            {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN_HARDCODED)}).pipe(
+                map((res: any[]) => {
+                    const actualRes = res.filter((item) => item.forest_area_id == forestAreaId);
+                    return actualRes.map((item) => ({
+                        ...item,
+                        startDate: trDate(item.start_date, "DD.mm.YYYY HH:MM"),
+                        endDate: trDate(item.end_date, "DD.mm.YYYY HH:MM"),
+                        forestAreaId: parseInt(item.forest_area_id),
+                        additionalInfo: item.additional_info,
+                        numberOfTreesToProceed: item.number_of_trees_to_proceed,
+                        teamLeader: item.team_leader,
+                        teamSize: item.team_size,
+                        type: item.type === 'forestation' ? 'zalesienie' : 'wycinka',
+                        status: item.status === 'active' ? 'zaplanowane' : 'wykonane'
+                    }))
+                })
+            )
     }
 
     public updateForestAction(action: XForestAction): any {//Observable<number> {
