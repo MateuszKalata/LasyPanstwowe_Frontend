@@ -3,7 +3,7 @@ export interface XForestAction {
     endDate: string;
     forestAreaId: number;
     forestationTypeId?: number;
-    id: number;
+    id?: number;
     numberOfTreesToProceed?: number;
     special_condition?: string;
     startDate: string;
@@ -11,4 +11,5 @@ export interface XForestAction {
     teamLeader?: string;
     teamSize?: string;
     type: string;
+    treeType?: string;
 }

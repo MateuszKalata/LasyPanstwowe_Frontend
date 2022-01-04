@@ -1,0 +1,93 @@
+<gmp-dialog>
+  <gmp-dialog-header>
+    Dodaj nową akcję leśną
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="newActionFormGroup">
+      <mat-form-field appearance="fill">
+        <mat-label>Wybierz obszar leśny</mat-label>
+        <mat-select [formControlName]="'forestryAreaX'">
+          <mat-option *ngFor="let area of forestryArea" [value]="area">{{area}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newActionFormGroup.get('forestryAreaX')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Wybierz typ</mat-label>
+        <mat-select [formControlName]="'type'">
+          <mat-option value="deforestration">Wycinka</mat-option>
+          <mat-option value="forestration">Zalesienie</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newActionFormGroup.get('type')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [formControlName]="'status'">
+          <mat-option value="active">Zaplanowane</mat-option>
+          <mat-option value="finished">Wykonane</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newActionFormGroup.get('status')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field" color="accent">
+        <input [formControlName]="'coordinator'" autocomplete="off" matInput placeholder="Kordynator">
+        <mat-error *ngIf="newActionFormGroup.get('coordinator')?.hasError('whitespace')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <input matInput type="number" [formControlName]="'teamSize'" placeholder="Liczba osób w zespole" min=1>
+        <mat-error *ngIf="newActionFormGroup.get('teamSize')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Wybierz daty</mat-label>
+        <mat-date-range-input formGroupName="range" [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="">
+          <input matEndDate formControlName="endDate" placeholder="">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Gatunek drzewa</mat-label>
+        <mat-select [formControlName]="'selectedTree'">
+          <mat-option value="brzoza">Brzoza</mat-option>
+          <mat-option value="sosna">Sosna</mat-option>
+          <mat-option value="dąb">Dąb</mat-option>
+          <mat-option value="buk">Buk</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newActionFormGroup.get('selectedTree')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <input matInput type="number" [formControlName]='"quantity"' placeholder="Ilość" min=1>
+        <mat-error *ngIf="newActionFormGroup.get('quantity')?.hasError('required')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field" color="accent">
+        <input [formControlName]="'specialCondition'" autocomplete="off" matInput placeholder="Specjalne warunki">
+        <mat-error *ngIf="newActionFormGroup.get('specialCondition')?.hasError('whitespace')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field" color="accent">
+        <input [formControlName]="'additionalInfo'" autocomplete="off" matInput placeholder="Dodatkowe informacje o akcji">
+        <mat-error *ngIf="newActionFormGroup.get('additionalInfo')?.hasError('whitespace')">
+          To pole nie może być puste.
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button (click)="onClose()" color="accent" mat-stroked-button type="button">Anuluj</button>
+        <button color="accent" mat-raised-button type="submit">Dodaj</button>
+      </div>
+    </form>
+  </gmp-dialog-content>
+</gmp-dialog>

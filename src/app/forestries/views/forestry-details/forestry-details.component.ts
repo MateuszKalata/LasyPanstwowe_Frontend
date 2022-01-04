@@ -13,6 +13,7 @@ import {XForestry} from '../../../models/forestry.model';
 import {ForestryDetailsPresenter} from '../../presenters/forestry-details.presenter';
 import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
 import {ForestAreaCreationFormComponent} from '../forest-area-creation-form/forest-area-creation-form.component';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'gmp-forestry-details',
@@ -90,7 +91,14 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   }
 
   public showActionsForForestry(): void {
-    this.router.navigate([`forestries/${this.forestryDetails?.id}/actions`]);
+    var forestryAreas: any[] = []
+    for (var i=0 ; i < this.forestAreasDataSource.data.length;i++) {
+      forestryAreas.push(this.forestAreasDataSource.data[i].id)
+
+    }
+    this.router.navigate([`forestries/${this.forestryDetails?.id}/actions`], { 
+      state: { forestryAreas: forestryAreas } 
+    });
   }
 
   private measureAreasSurface(): number {

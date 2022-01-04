@@ -18,6 +18,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 import {AppRoutingModule} from './app-routing.module';
@@ -43,6 +45,9 @@ import { SensorAssignmentFormComponent } from './sensors/views/sensor-assignment
 import { EmergencyListComponent } from './emergencies/views/emergency-list/emergency-list.component';
 import { EmergencyDetailsComponent } from './emergencies/views/emergency-details/emergency-details.component';
 import { ForestActionListComponent } from './forest-actions/views/forest-action-list/forest-action-list.component';
+import { ActionCreationFormComponent } from './forest-actions/views/forest-action-form/forest-action-form.component';
+import { Action } from 'rxjs/internal/scheduler/Action';
+
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -70,7 +75,8 @@ export let AppInjector: Injector;
     SensorAssignmentFormComponent,
     EmergencyListComponent,
     EmergencyDetailsComponent,
-    ForestActionListComponent
+    ForestActionListComponent,
+    ActionCreationFormComponent
   ],
   imports: [
     BrowserModule,
@@ -101,6 +107,8 @@ export let AppInjector: Injector;
     }),
     FormsModule,
     NgxChartsModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
