@@ -51,7 +51,10 @@ export class ForestActionPresenter implements IShowForestActionList, IShowForest
 
         this.forestActionService.createForestAction(action).subscribe(
           (data) => {
-           this.forestActionViews?.showForestActionCreateMessage()
+            if (this.forestryId) {
+              this.onShowForestActionListClicked(this.forestryId);
+            }
+            this.forestActionViews?.showForestActionCreateMessage();
           },
           (error) => {
             console.log(error.error.message)

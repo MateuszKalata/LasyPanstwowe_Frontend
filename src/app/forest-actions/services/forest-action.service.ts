@@ -47,8 +47,7 @@ export class ForestActionService {
     return this.httpClient.get<any[]>(environment.apiUrl + `/forestactions`,
       {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)}).pipe(
       map((res: any[]) => {
-        return res.filter((item) => item.forest_area_id == forestAreaId)
-          .map((item) => ({
+        return res.map((item) => ({
             ...item,
             forest_area_id: +item.forest_area_id,
           }));

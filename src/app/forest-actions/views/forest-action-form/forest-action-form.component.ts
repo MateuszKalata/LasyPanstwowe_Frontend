@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { XForestAction } from '../../../models/forest-action.model';
+import {XForestArea} from '../../../models/forest-area.model';
 
 @Component({
   selector: 'gmp-forest-action-form',
@@ -37,11 +38,11 @@ export class ActionCreationFormComponent implements OnInit {
     },
     { updateOn: 'submit' }
   );
-  forestryArea = [];
+  public forestryArea: XForestArea[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<ActionCreationFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: []
+    @Inject(MAT_DIALOG_DATA) public data: XForestArea[]
   ) {
     this.forestryArea = data;
   }

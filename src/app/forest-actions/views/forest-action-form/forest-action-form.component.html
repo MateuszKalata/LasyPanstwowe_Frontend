@@ -7,7 +7,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Wybierz obszar leśny</mat-label>
         <mat-select [formControlName]="'forestryAreaX'">
-          <mat-option *ngFor="let area of forestryArea" [value]="area">{{area}}</mat-option>
+          <mat-option *ngFor="let area of forestryArea" [value]="area.id">{{area.name}}</mat-option>
         </mat-select>
         <mat-error *ngIf="newActionFormGroup.get('forestryAreaX')?.hasError('required')">
           To pole nie może być puste.

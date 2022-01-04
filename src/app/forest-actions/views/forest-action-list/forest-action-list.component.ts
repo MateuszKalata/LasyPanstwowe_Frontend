@@ -25,7 +25,7 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
   public filterValue: string = 'all';
   public ForestActionTypeEnum = ForestActionTypeEnum;
   public ForestActionStatusEnum = ForestActionStatusEnum;
-  public columns: string[] = ['id', 'type', 'status', 'startDate', 'endDate', 'actions'];
+  public columns: string[] = ['id', 'type', 'status', 'forestArea', 'startDate', 'endDate', 'actions'];
   public presenter: IShowForestActionList & IMarkForestActionAsDone & ICreateForestAction;
 
   constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
@@ -78,7 +78,7 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
     const dialogRef: MatDialogRef<ActionCreationFormComponent> = this.dialog.open(ActionCreationFormComponent, {
       autoFocus: false,
       maxHeight: '90vh',
-      data: window.history.state.forestryAreas
+      data: window.history.state.forestryAreas,
     });
     dialogRef.afterClosed().subscribe((res: XForestAction | undefined) => {
         if (res) {

@@ -4,7 +4,7 @@
     </gmp-tab-header>
     <gmp-tab-content>
       <div class="table-actions">
-        <button 
+        <button
               (click)="onCreateForestActionClicked()"
               color="accent"
               mat-raised-button>
@@ -34,6 +34,10 @@
                 <th *matHeaderCellDef mat-header-cell> Status</th>
                 <td *matCellDef="let element" mat-cell> {{ 'forestActionStatus.'+ element.status |translate}} </td>
               </ng-container>
+          <ng-container matColumnDef="forestArea">
+            <th *matHeaderCellDef mat-header-cell>Id obszaru leśnego</th>
+            <td *matCellDef="let element" mat-cell> {{element.forest_area_id}} </td>
+          </ng-container>
             <ng-container matColumnDef="startDate">
               <th *matHeaderCellDef mat-header-cell> Data rozpoczęcia</th>
               <td *matCellDef="let element" mat-cell> {{element.start_date | date:'dd.MM.YYYY'}} </td>
