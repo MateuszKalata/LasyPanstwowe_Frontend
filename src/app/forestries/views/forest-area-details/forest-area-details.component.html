@@ -1,0 +1,32 @@
+<gmp-dialog>
+  <gmp-dialog-header>
+    Szczegóły akcji leśnej
+  </gmp-dialog-header>
+  <gmp-dialog-content>
+    <div>
+      <h3>Id obszaru</h3>
+      <p>{{data.forestArea.id}}</p>
+
+      <h3>Nazwa obszaru</h3>
+      <p>{{data.forestArea.name}}</p>
+
+      <h3>Powierzchnia obszaru</h3>
+      <p>{{data.forestArea.surface}} ha</p>
+
+      <h3>Zalesienia</h3>
+      <table *ngIf="data.forestArea.forestationTypes" [dataSource]="data.forestArea.forestationTypes" mat-table>
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell >Nazwa</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tree_number">
+          <th *matHeaderCellDef mat-header-cell>Liczba drzew</th>
+          <td *matCellDef="let element" mat-cell> {{element.surface}} </td>
+        </ng-container>
+        <tr *matHeaderRowDef="forestAreasColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: forestAreasColumns;" mat-row></tr>
+      </table>
+    </div>
+  </gmp-dialog-content>
+</gmp-dialog>
+

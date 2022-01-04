@@ -7,5 +7,13 @@
     "fire": "Pożar",
     "wind": "Wichura",
     "temperature": "Pożar"
+  },
+  "forestActionStatus": {
+    "active": "Aktywna",
+    "finished": "Wykonana"
+  },
+  "forestActionType": {
+    "forestration": "Zalesienie",
+    "deforestration": "Wycinka"
   }
 }

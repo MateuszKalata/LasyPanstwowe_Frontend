@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'emergencies/:id', component: EmergencyDetailsComponent},
   {path: 'sensors', component: SensorListComponent},
   {path: 'sensors/:id', component: SensorListComponent},
-  {path: 'forestries/:id/actions', component: ForestActionListComponent}
+  {path: 'forestries/:id/actions', component: ForestActionListComponent},
 ];
 
 @NgModule({

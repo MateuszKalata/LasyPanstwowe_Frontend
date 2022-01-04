@@ -13,6 +13,7 @@ import {XForestry} from '../../../models/forestry.model';
 import {ForestryDetailsPresenter} from '../../presenters/forestry-details.presenter';
 import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
 import {ForestAreaCreationFormComponent} from '../forest-area-creation-form/forest-area-creation-form.component';
+import {ForestAreaDetailsComponent} from '../forest-area-details/forest-area-details.component';
 
 @Component({
   selector: 'gmp-forestry-details',
@@ -23,7 +24,7 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   public forestryDetailsPresenter: ICreateForestArea & IShowForestryDetails;
   public forestryDetails: XForestryDetails | undefined;
 
-  public forestAreasColumns: string[] = ['id', 'name', 'surface'];
+  public forestAreasColumns: string[] = ['id', 'name', 'surface', 'actions'];
   public forestAreasDataSource: MatTableDataSource<XForestArea> = new MatTableDataSource<XForestArea>([]);
   @ViewChild(MatSort) public sort: MatSort | undefined;
 
@@ -91,6 +92,14 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
 
   public showActionsForForestry(): void {
     this.router.navigate([`forestries/${this.forestryDetails?.id}/actions`]);
+  }
+
+  public onForestryAreaDetailsClicked(forestArea: XForestArea): void {
+    this.dialog.open(ForestAreaDetailsComponent, {
+      data: {
+        forestArea,
+      },
+    });
   }
 
   private measureAreasSurface(): number {
