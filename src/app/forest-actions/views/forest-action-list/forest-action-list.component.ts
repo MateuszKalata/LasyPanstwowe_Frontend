@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-
-import { XForestAction } from 'src/app/models/forest-action.model';
-import { ForestActionStatusEnum } from '../../enums/forest-action-status.enum';
-import { ForestActionTypeEnum } from '../../enums/forest-action-type.enum';
-import { ForestActionPresenter } from '../../presenters/forest-action.presenter';
-import { IMarkForestActionAsDone } from '../../presenters/interfaces/mark-forest-action-as-done.interface';
-import { IShowForestActionList } from '../../presenters/interfaces/show-forest-action-list.interface';
-import { IForestActionViews } from '../interfaces/forest-action-views.interface';
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute } from "@angular/router";
+import { XForestAction } from "src/app/models/forest-action.model";
+import { ForestActionStatusEnum } from "../../enums/forest-action-status.enum";
+import { ForestActionTypeEnum } from "../../enums/forest-action-type.enum";
+import { ForestActionPresenter } from "../../presenters/forest-action.presenter";
+import { IMarkForestActionAsDone } from "../../presenters/interfaces/mark-forest-action-as-done.interface";
+import { IShowForestActionList } from "../../presenters/interfaces/show-forest-action-list.interface";
+import { IForestActionViews } from "../interfaces/forest-action-views.interface";
 import {ForestActionDetailsComponent} from '../forest-action-details/forest-action-details.component';
 
 @Component({
@@ -18,7 +18,7 @@ import {ForestActionDetailsComponent} from '../forest-action-details/forest-acti
 })
 
 export class ForestActionListComponent implements OnInit, IForestActionViews {
-    public actionList: XForestAction[] = [];
+    public actionList: MatTableDataSource<XForestAction> = new MatTableDataSource<XForestAction>([]);
     public filterValue: string = 'all';
     public ForestActionTypeEnum = ForestActionTypeEnum;
     public ForestActionStatusEnum = ForestActionStatusEnum;
@@ -27,7 +27,6 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
 
     constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) {
         this.activatedRoute = activatedRoute;
-        console.log(activatedRoute);
         this.presenter = new ForestActionPresenter(this, undefined);
     }
 
@@ -41,8 +40,12 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
     public showForestActionCreationForm(): void {
         throw new Error('Method not implemented.');
     }
-    public showForestActionList(data: XForestAction[]): void {
-        this.actionList = data;
+    showForestActionList(data: XForestAction[]): void {
+        this.actionList = new MatTableDataSource<XForestAction>(data);
+        this.actionList.filterPredicate = (data, filter: string): boolean => {
+            return data.type.toLowerCase().includes(filter.toLowerCase());
+        }
+        this.onFilterSelected(this.filterValue)
     }
 
     public showForestActionDetailsClicked(id: string): void {
@@ -54,6 +57,6 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
     }
 
     public onFilterSelected(value: any): void {
-        console.log(value);
-      }
+        this.actionList.filter = value === 'all' ? '' : value;
+    }
 }

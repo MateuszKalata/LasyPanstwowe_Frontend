@@ -1,10 +1,10 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-import {Observable} from 'rxjs';
-
-import { XForestAction } from 'src/app/models/forest-action.model';
-import {environment} from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { trDate } from "src/app/helpers/trDate";
+import { XForestAction } from "src/app/models/forest-action.model";
+import { environment } from "src/environments/environment";
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -22,12 +22,32 @@ export class ForestActionService {
 
     }
 
-    public getForestAction(actionId: number): Observable<XForestAction> {
-      return this.httpClient.get<XForestAction>(this.FOREST_ACTION_API_URL + `/${actionId}`, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
+    public getForestActions(forestAreaId: number): Observable<XForestAction[]> {
+        // return mockedForestActionList(forestAreaId);
+        console.log("qwe")
+        return this.httpClient.get<any[]>(environment.apiUrl + `/forestactions`,
+            {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)}).pipe(
+                map((res: any[]) => {
+                    const actualRes = res.filter((item) => item.forest_area_id == forestAreaId);
+                    return actualRes.map((item) => ({
+                        ...item,
+                        startDate: trDate(item.start_date, "DD.mm.YYYY HH:MM"),
+                        endDate: trDate(item.end_date, "DD.mm.YYYY HH:MM"),
+                        forestAreaId: parseInt(item.forest_area_id),
+                        additionalInfo: item.additional_info,
+                        numberOfTreesToProceed: item.number_of_trees_to_proceed,
+                        teamLeader: item.team_leader,
+                        teamSize: item.team_size,
+                        type: item.type === 'forestation' ? 'zalesienie' : 'wycinka',
+                        status: item.status === 'active' ? 'zaplanowane' : 'wykonane'
+                    }))
+                })
+            )
     }
 
-    public getForestActions(forestryId: number): Observable<XForestAction[]> {
-        return this.httpClient.get<XForestAction[]>(this.FOREST_ACTION_API_URL + 's', {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
+
+    public getForestAction(actionId: number): Observable<XForestAction> {
+      return this.httpClient.get<XForestAction>(this.FOREST_ACTION_API_URL + `/${actionId}`, {headers: new HttpHeaders().set('Authorization', this.AUTH_TOKEN)});
     }
 
     public updateForestAction(id: number): Observable<any> {
