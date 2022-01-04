@@ -14,10 +14,10 @@
       </div>
       <div class="table-wrapper">
         <mat-form-field color="accent">
-          <mat-label>Typ akcji leśnej</mat-label>
+          <mat-label>Status akcji leśnej</mat-label>
           <mat-select [(value)]="filterValue" (selectionChange)="onFilterSelected($event.value)">
-            <mat-option  [value]="ForestActionTypeEnum.ADD">Zalesienie</mat-option>
-            <mat-option  [value]="ForestActionTypeEnum.DELETE">Wycinka</mat-option>
+            <mat-option  [value]="ForestActionStatusEnum.DONE">Wykonane</mat-option>
+            <mat-option  [value]="ForestActionStatusEnum.PLANNED">Aktywne</mat-option>
             <mat-option  [value]="'all'">Wszystkie</mat-option>
           </mat-select>
         </mat-form-field>

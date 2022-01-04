@@ -52,7 +52,7 @@ export class ForestActionListComponent implements OnInit, IForestActionViews {
   showForestActionList(data: XForestAction[]): void {
     this.actionList = new MatTableDataSource<XForestAction>(data);
     this.actionList.filterPredicate = (forestAction, filter: string): boolean => {
-      return forestAction.type.toLowerCase() === filter.toLowerCase();
+      return forestAction.status.toLowerCase().includes(filter.toLowerCase());
     };
     this.onFilterSelected(this.filterValue);
   }
