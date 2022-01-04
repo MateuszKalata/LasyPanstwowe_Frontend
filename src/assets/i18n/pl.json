@@ -13,7 +13,7 @@
     "finished": "Wykonana"
   },
   "forestActionType": {
-    "forestration": "Zalesienie",
-    "deforestration": "Wycinka"
+    "forestation": "Zalesienie",
+    "deforestation": "Wycinka"
   }
 }

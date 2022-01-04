@@ -1,4 +1,4 @@
 export enum ForestActionTypeEnum {
-    ADD = 'zalesienie',
-    DELETE = 'wycinka'
+    ADD = 'forestation',
+    DELETE = 'deforestation',
 }

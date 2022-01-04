@@ -16,8 +16,8 @@
       <mat-form-field appearance="fill">
         <mat-label>Wybierz typ</mat-label>
         <mat-select [formControlName]="'type'">
-          <mat-option value="deforestration">Wycinka</mat-option>
-          <mat-option value="forestration">Zalesienie</mat-option>
+          <mat-option value="deforestation">Wycinka</mat-option>
+          <mat-option value="forestation">Zalesienie</mat-option>
         </mat-select>
         <mat-error *ngIf="newActionFormGroup.get('type')?.hasError('required')">
           To pole nie może być puste.
