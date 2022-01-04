@@ -23,16 +23,6 @@
           To pole nie może być puste.
         </mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
-        <mat-select [formControlName]="'status'">
-          <mat-option value="active">Zaplanowane</mat-option>
-          <mat-option value="finished">Wykonane</mat-option>
-        </mat-select>
-        <mat-error *ngIf="newActionFormGroup.get('status')?.hasError('required')">
-          To pole nie może być puste.
-        </mat-error>
-      </mat-form-field>
       <mat-form-field class="field" color="accent">
         <input [formControlName]="'coordinator'" autocomplete="off" matInput placeholder="Kordynator">
         <mat-error *ngIf="newActionFormGroup.get('coordinator')?.hasError('whitespace')">
@@ -69,18 +59,6 @@
       <mat-form-field color="accent">
         <input matInput type="number" [formControlName]='"quantity"' placeholder="Ilość" min=1>
         <mat-error *ngIf="newActionFormGroup.get('quantity')?.hasError('required')">
-          To pole nie może być puste.
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="field" color="accent">
-        <input [formControlName]="'specialCondition'" autocomplete="off" matInput placeholder="Specjalne warunki">
-        <mat-error *ngIf="newActionFormGroup.get('specialCondition')?.hasError('whitespace')">
-          To pole nie może być puste.
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="field" color="accent">
-        <input [formControlName]="'additionalInfo'" autocomplete="off" matInput placeholder="Dodatkowe informacje o akcji">
-        <mat-error *ngIf="newActionFormGroup.get('additionalInfo')?.hasError('whitespace')">
           To pole nie może być puste.
         </mat-error>
       </mat-form-field>

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { XForestAction } from '../../../models/forest-action.model';
 import {XForestArea} from '../../../models/forest-area.model';
+import {ForestActionStatusEnum} from '../../enums/forest-action-status.enum';
 
 @Component({
   selector: 'gmp-forest-action-form',
@@ -19,16 +20,7 @@ export class ActionCreationFormComponent implements OnInit {
       }),
       type: new FormControl('', [Validators.required]),
       forestryAreaX: new FormControl('', [Validators.required]),
-      status: new FormControl('', [Validators.required]),
       coordinator: new FormControl('', [
-        Validators.required,
-        this.noWhitespaceValidator,
-      ]),
-      additionalInfo: new FormControl('', [
-        Validators.required,
-        this.noWhitespaceValidator,
-      ]),
-      specialCondition: new FormControl('', [
         Validators.required,
         this.noWhitespaceValidator,
       ]),
@@ -63,12 +55,11 @@ export class ActionCreationFormComponent implements OnInit {
         forest_area_id: this.newActionFormGroup.controls.forestryAreaX.value,
         start_date: this.newActionFormGroup.get('range.startDate')?.value,
         type: this.newActionFormGroup.controls.type.value,
-        status: this.newActionFormGroup.controls.status.value,
-        additional_info: this.newActionFormGroup.controls.additionalInfo.value,
+        status: ForestActionStatusEnum.PLANNED,
+        additional_info: '',
         team_leader: this.newActionFormGroup.controls.coordinator.value,
         team_size: this.newActionFormGroup.controls.teamSize.value,
-        special_condition:
-          this.newActionFormGroup.controls.specialCondition.value,
+        special_condition: '',
         number_of_trees_to_proceed: this.newActionFormGroup.controls.quantity.value,
         tree_type: this.newActionFormGroup.controls.selectedTree.value,
       };
