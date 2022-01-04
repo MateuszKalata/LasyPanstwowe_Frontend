@@ -14,6 +14,7 @@ import {ForestryDetailsPresenter} from '../../presenters/forestry-details.presen
 import {MessageDialogComponent} from '../../../components/message-dialog/message-dialog.component';
 import {ForestAreaCreationFormComponent} from '../forest-area-creation-form/forest-area-creation-form.component';
 import {ForestAreaDetailsComponent} from '../forest-area-details/forest-area-details.component';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'gmp-forestry-details',
@@ -91,7 +92,14 @@ export class ForestryDetailsComponent implements OnInit, AfterViewInit, IForestr
   }
 
   public showActionsForForestry(): void {
-    this.router.navigate([`forestries/${this.forestryDetails?.id}/actions`]);
+    var forestryAreas: any[] = []
+    for (var i=0 ; i < this.forestAreasDataSource.data.length;i++) {
+      forestryAreas.push(this.forestAreasDataSource.data[i].id)
+
+    }
+    this.router.navigate([`forestries/${this.forestryDetails?.id}/actions`], { 
+      state: { forestryAreas: forestryAreas } 
+    });
   }
 
   public onForestryAreaDetailsClicked(forestArea: XForestArea): void {

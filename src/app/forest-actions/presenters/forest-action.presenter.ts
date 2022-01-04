@@ -1,5 +1,4 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { AppInjector } from 'src/app/app.module';
 import { XForestAction } from 'src/app/models/forest-action.model';
 import { ForestActionService } from '../services/forest-action.service';
@@ -25,8 +24,8 @@ export class ForestActionPresenter implements IShowForestActionList, IShowForest
     }
 
     public onCreateForestActionClicked(): void {
-        throw new Error('Method not implemented.');
-    }
+        this.forestActionViews?.showForestActionCreationForm();
+      }
     public onShowForestActionListClicked(id: number): void {
         this.forestryId = id;
       this.forestActionService.getForestActions(id).subscribe((forestActions) => {
@@ -49,6 +48,17 @@ export class ForestActionPresenter implements IShowForestActionList, IShowForest
       });
     }
     public onForestActionSave(action: XForestAction): void {
-        throw new Error('Method not implemented.');
-    }
-}
+
+        this.forestActionService.createForestAction(action).subscribe(
+          (data) => {
+           this.forestActionViews?.showForestActionCreateMessage()
+          },
+          (error) => {
+            console.log(error.error.message)
+            this.forestActionViews?.showForestActionCreateFailureMessage(error.error.message);
+          }
+        );
+      }
+ }
+
+

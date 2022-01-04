@@ -2,12 +2,12 @@
     <gmp-tab-header>
       Akcje leśne
     </gmp-tab-header>
-
     <gmp-tab-content>
       <div class="table-actions">
-        <button
-                color="accent"
-                mat-raised-button>
+        <button 
+              (click)="onCreateForestActionClicked()"
+              color="accent"
+              mat-raised-button>
           <mat-icon>add</mat-icon>
           Dodaj akcję leśną
         </button>

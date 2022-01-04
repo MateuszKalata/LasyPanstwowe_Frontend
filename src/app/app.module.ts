@@ -17,8 +17,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
-
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
@@ -44,6 +48,9 @@ import { EmergencyDetailsComponent } from './emergencies/views/emergency-details
 import { ForestActionListComponent } from './forest-actions/views/forest-action-list/forest-action-list.component';
 import {ForestActionDetailsComponent} from './forest-actions/views/forest-action-details/forest-action-details.component';
 import { ForestAreaDetailsComponent } from './forestries/views/forest-area-details/forest-area-details.component';
+import { ActionCreationFormComponent } from './forest-actions/views/forest-action-form/forest-action-form.component';
+import { Action } from 'rxjs/internal/scheduler/Action';
+
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -74,6 +81,7 @@ export let AppInjector: Injector;
     ForestActionListComponent,
     ForestActionDetailsComponent,
     ForestAreaDetailsComponent,
+    ActionCreationFormComponent
   ],
   imports: [
     BrowserModule,
@@ -104,6 +112,8 @@ export let AppInjector: Injector;
     }),
     FormsModule,
     NgxChartsModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

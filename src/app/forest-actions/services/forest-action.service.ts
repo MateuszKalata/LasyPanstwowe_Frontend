@@ -1,15 +1,14 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { trDate } from "src/app/helpers/trDate";
 import { XForestAction } from "src/app/models/forest-action.model";
 import { environment } from "src/environments/environment";
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
-
 export class ForestActionService {
     private readonly AUTH_TOKEN: string = 'Basic YXBpOm5pZXNhbW93aWNpZXNrb21wbGlrb3dhbmVoYXNsbw==';
     private FOREST_ACTION_API_URL: string = environment.apiUrl2 + '/forestaction';
@@ -18,9 +17,32 @@ export class ForestActionService {
 
     }
 
-    public createForestAction(data: XForestAction): any {// Observable<number> {
-
-    }
+  public createForestAction(array: XForestAction): Observable<any> {
+      console.log(array)
+    const data: any = {
+      end_date: array.end_date,
+      forest_area_id: array.forest_area_id,
+      start_date: array.start_date,
+      type: array.type,
+      status: array.status,
+      additional_info: array.additional_info,
+      team_leader: array.team_leader,
+      team_size: array.team_size,
+      special_condition: array.special_condition,
+      number_of_trees_to_proceed: array.number_of_trees_to_proceed,
+      tree_type: array.tree_type,
+    };
+    return this.httpClient.post(environment.apiUrl + '/forestaction', data, {
+      headers: new HttpHeaders().set(
+        'Authorization',
+        this.AUTH_TOKEN
+      ),
+    }).pipe(
+        catchError( (error) => {
+            return throwError(error)
+        })
+      );;
+  }
 
     public getForestActions(forestAreaId: number): Observable<XForestAction[]> {
         // return mockedForestActionList(forestAreaId);
